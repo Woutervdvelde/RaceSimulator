@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Model
 {
-    enum TeamColors
+    public enum TeamColors
     {
         Red, Green, Yellow, Grey, Blue
     }

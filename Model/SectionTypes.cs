@@ -2,7 +2,7 @@
 
 namespace Model
 {
-    enum SectionTypes
+    public enum SectionTypes
     {
         Straight, LeftCorner, RightCorner, StartGrid, Finish
     }
