@@ -1,0 +1,12 @@
+C:\Users\Wouter\OneDrive - Windesheim Office365\HBO-ICT\Jaar 2\Periode 1\C#\RaceSimulator\Controller\obj\Debug\netcoreapp3.1\Controller.csprojAssemblyReference.cache
+C:\Users\Wouter\OneDrive - Windesheim Office365\HBO-ICT\Jaar 2\Periode 1\C#\RaceSimulator\Controller\obj\Debug\netcoreapp3.1\Controller.AssemblyInfoInputs.cache
+C:\Users\Wouter\OneDrive - Windesheim Office365\HBO-ICT\Jaar 2\Periode 1\C#\RaceSimulator\Controller\obj\Debug\netcoreapp3.1\Controller.AssemblyInfo.cs
+C:\Users\Wouter\OneDrive - Windesheim Office365\HBO-ICT\Jaar 2\Periode 1\C#\RaceSimulator\Controller\obj\Debug\netcoreapp3.1\Controller.csproj.CoreCompileInputs.cache
+C:\Users\Wouter\OneDrive - Windesheim Office365\HBO-ICT\Jaar 2\Periode 1\C#\RaceSimulator\Controller\bin\Debug\netcoreapp3.1\Controller.deps.json
+C:\Users\Wouter\OneDrive - Windesheim Office365\HBO-ICT\Jaar 2\Periode 1\C#\RaceSimulator\Controller\bin\Debug\netcoreapp3.1\Controller.dll
+C:\Users\Wouter\OneDrive - Windesheim Office365\HBO-ICT\Jaar 2\Periode 1\C#\RaceSimulator\Controller\bin\Debug\netcoreapp3.1\Controller.pdb
+C:\Users\Wouter\OneDrive - Windesheim Office365\HBO-ICT\Jaar 2\Periode 1\C#\RaceSimulator\Controller\bin\Debug\netcoreapp3.1\Model.dll
+C:\Users\Wouter\OneDrive - Windesheim Office365\HBO-ICT\Jaar 2\Periode 1\C#\RaceSimulator\Controller\bin\Debug\netcoreapp3.1\Model.pdb
+C:\Users\Wouter\OneDrive - Windesheim Office365\HBO-ICT\Jaar 2\Periode 1\C#\RaceSimulator\Controller\obj\Debug\netcoreapp3.1\Controller.csproj.CopyComplete
+C:\Users\Wouter\OneDrive - Windesheim Office365\HBO-ICT\Jaar 2\Periode 1\C#\RaceSimulator\Controller\obj\Debug\netcoreapp3.1\Controller.dll
+C:\Users\Wouter\OneDrive - Windesheim Office365\HBO-ICT\Jaar 2\Periode 1\C#\RaceSimulator\Controller\obj\Debug\netcoreapp3.1\Controller.pdb

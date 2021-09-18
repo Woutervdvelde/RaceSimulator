@@ -5,7 +5,7 @@ using Model;
 
 namespace Controller
 {
-    class Race
+    public class Race
     {
         /**
          * Important rules for position players:
