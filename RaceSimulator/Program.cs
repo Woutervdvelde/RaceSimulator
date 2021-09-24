@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using Controller;
+using Model;
 
 namespace RaceSimulator
 {
@@ -11,6 +12,11 @@ namespace RaceSimulator
             Data.Initialize();
             Data.NextRace();
             Console.WriteLine(Data.CurrentRace.Track.Name);
+
+            Console.WriteLine("Participants:");
+            Data.CurrentRace.Participants.ForEach(participant => {
+                Console.WriteLine($"\t - {participant.Name}");
+            });
 
             for (; ; )
             {

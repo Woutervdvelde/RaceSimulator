@@ -51,11 +51,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Wouter\\OneDrive - Windesheim Office365\\HBO-ICT\\Jaar 2\\Periode 1\\C#\\RaceSimulator\\RaceSimulator\\RaceSimulator.csproj",
+      "projectUniqueName": "F:\\git repository\\Windesheim HBO\\RaceSimulator\\RaceSimulator\\RaceSimulator.csproj",
       "projectName": "RaceSimulator",
-      "projectPath": "C:\\Users\\Wouter\\OneDrive - Windesheim Office365\\HBO-ICT\\Jaar 2\\Periode 1\\C#\\RaceSimulator\\RaceSimulator\\RaceSimulator.csproj",
+      "projectPath": "F:\\git repository\\Windesheim HBO\\RaceSimulator\\RaceSimulator\\RaceSimulator.csproj",
       "packagesPath": "C:\\Users\\Wouter\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Wouter\\OneDrive - Windesheim Office365\\HBO-ICT\\Jaar 2\\Periode 1\\C#\\RaceSimulator\\RaceSimulator\\obj\\",
+      "outputPath": "F:\\git repository\\Windesheim HBO\\RaceSimulator\\RaceSimulator\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Wouter\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -72,11 +72,11 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\Wouter\\OneDrive - Windesheim Office365\\HBO-ICT\\Jaar 2\\Periode 1\\C#\\RaceSimulator\\Controller\\Controller.csproj": {
-              "projectPath": "C:\\Users\\Wouter\\OneDrive - Windesheim Office365\\HBO-ICT\\Jaar 2\\Periode 1\\C#\\RaceSimulator\\Controller\\Controller.csproj"
+            "F:\\git repository\\Windesheim HBO\\RaceSimulator\\Controller\\Controller.csproj": {
+              "projectPath": "F:\\git repository\\Windesheim HBO\\RaceSimulator\\Controller\\Controller.csproj"
             },
-            "C:\\Users\\Wouter\\OneDrive - Windesheim Office365\\HBO-ICT\\Jaar 2\\Periode 1\\C#\\RaceSimulator\\Model\\Model.csproj": {
-              "projectPath": "C:\\Users\\Wouter\\OneDrive - Windesheim Office365\\HBO-ICT\\Jaar 2\\Periode 1\\C#\\RaceSimulator\\Model\\Model.csproj"
+            "F:\\git repository\\Windesheim HBO\\RaceSimulator\\Model\\Model.csproj": {
+              "projectPath": "F:\\git repository\\Windesheim HBO\\RaceSimulator\\Model\\Model.csproj"
             }
           }
         }
