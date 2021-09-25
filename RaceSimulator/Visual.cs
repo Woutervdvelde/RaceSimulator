@@ -86,13 +86,13 @@ namespace RaceSimulator
                     break;
                 case SectionTypes.LeftCorner:
                     if (_direction == Directions.North)
-                        section.Graphic = _cornerNorthWest;
-                    if (_direction == Directions.East)
-                        section.Graphic = _cornerNorthEast;
-                    if (_direction == Directions.South)
-                        section.Graphic = _cornerSouthEast;
-                    if (_direction == Directions.West)
                         section.Graphic = _cornerSouthWest;
+                    if (_direction == Directions.East)
+                        section.Graphic = _cornerNorthWest;
+                    if (_direction == Directions.South)
+                        section.Graphic = _cornerNorthEast;
+                    if (_direction == Directions.West)
+                        section.Graphic = _cornerSouthEast;
 
                     if (_direction - 1 < 0)
                         _direction = Directions.West;
