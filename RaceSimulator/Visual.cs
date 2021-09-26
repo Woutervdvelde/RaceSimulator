@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using Model;
 
 namespace RaceSimulator
@@ -29,17 +30,19 @@ namespace RaceSimulator
 
         #region graphics
 
+        public static string CarDefault = "█";
+
         private static int _width = 9;
         private static int _height = 4;
-        private static string[] _startHorizontal = { "═════════", "   ]   ] ", " ]   ]   ", "═════════" };
-        private static string[] _finishHorizontal = { "════░════", "    ░    ", "    ░    ", "════░════" };
-        private static string[] _straightHorizontal = { "═════════", "         ", "         ", "═════════" };
-        private static string[] _straightVertical = { "║       ║", "║       ║", "║       ║", "║       ║" };
+        private static string[] _startHorizontal = { "═════════", "      L] ", " R]      ", "═════════" };
+        private static string[] _finishHorizontal = { "════░════", "  L ░    ", "  R ░    ", "════░════" };
+        private static string[] _straightHorizontal = { "═════════", "    L    ", "    R    ", "═════════" };
+        private static string[] _straightVertical = { "║       ║", "║       ║", "║ L   R ║", "║       ║" };
 
-        private static string[] _cornerNorthWest = { "╝       ║", "        ║", "        ║", "════════╝" };
-        private static string[] _cornerNorthEast = { "║       ╚", "║        ", "║        ", "╚════════" };
-        private static string[] _cornerSouthWest = { "════════╗", "        ║", "        ║", "╗       ║" };
-        private static string[] _cornerSouthEast = { "╔════════", "║        ", "║        ", "║       ╔" };
+        private static string[] _cornerNorthWest = { "╝       ║", "  L  R  ║", "        ║", "════════╝" };
+        private static string[] _cornerNorthEast = { "║       ╚", "║  L  R  ", "║        ", "╚════════" };
+        private static string[] _cornerSouthWest = { "════════╗", "        ║", " L   R  ║", "╗       ║" };
+        private static string[] _cornerSouthEast = { "╔════════", "║        ", "║  L  R  ", "║       ╔" };
 
         #endregion
 
@@ -52,9 +55,10 @@ namespace RaceSimulator
                 {
                     Console.SetCursorPosition(section.X * _width + _offsetX, section.Y * _height + _offsetY + i);
                     Console.Write(section.Graphic[i]);
-                    //Console.WriteLine($"Drawing section string: X = {section.X * _width + _offsetX} | Y = {section.Y * _height + _offsetY + i}");
+                    Thread.Sleep(25);
                 }
             }
+            Initialize();
         }
 
         private static void GenerateCoordinatesAndGraphics(LinkedList<Section> sections)
