@@ -8,6 +8,7 @@ namespace Model
     {
         public string Name { get; set; }
         public LinkedList<Section> Sections { get; set; }
+        public bool HasGeneratedSections { get; set; }
 
         public Track(string name, SectionTypes[] sections)
         {
@@ -25,6 +26,20 @@ namespace Model
                 sectionList.AddLast(section);
             }
 
+            return sectionList;
+        }
+
+        public LinkedList<Section> GetStartSections()
+        {
+            LinkedList<Section> sectionList = new LinkedList<Section>();
+
+            foreach (Section section in Sections)
+            {
+                if (section.SectionType == SectionTypes.StartGrid)
+                    sectionList.AddFirst(section);
+                else
+                    return sectionList;
+            }
             return sectionList;
         }
     }

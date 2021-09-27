@@ -12,7 +12,7 @@ namespace RaceSimulator
             Data.Initialize();
             Data.NextRace();
 
-            Visual.Initialize();
+            Visual.Initialize(Data.CurrentRace);
             Visual.DrawTrack(Data.CurrentRace.Track);
 
             for (; ; )

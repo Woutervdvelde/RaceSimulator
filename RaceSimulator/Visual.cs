@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using Controller;
 using Model;
 
 namespace RaceSimulator
@@ -13,14 +14,16 @@ namespace RaceSimulator
 
     public static class Visual
     {
+        private static Race _currentRace;
         private static Directions _direction;
         private static int _lastX;
         private static int _lastY;
         private static int _offsetX;
         private static int _offsetY;
 
-        public static void Initialize()
+        public static void Initialize(Race currentRace)
         {
+            _currentRace = currentRace;
             _direction = Directions.East;
             _lastX = 0;
             _lastY = 0;
@@ -48,28 +51,64 @@ namespace RaceSimulator
 
         public static void DrawTrack(Track track)
         {
-            GenerateCoordinatesAndGraphics(track.Sections);
+            if (!track.HasGeneratedSections)
+                GenerateCoordinatesAndGraphics(track);
+
             foreach (Section section in track.Sections)
             {
-                for (int i = 0; i < section.Graphic.Length; i++)
-                {
-                    Console.SetCursorPosition(section.X * _width + _offsetX, section.Y * _height + _offsetY + i);
-                    Console.Write(section.Graphic[i]);
-                    Thread.Sleep(25);
-                }
+                DrawSection(section);
             }
-            Initialize();
         }
 
-        private static void GenerateCoordinatesAndGraphics(LinkedList<Section> sections)
+        public static void DrawSection(Section section)
         {
-            foreach (Section section in sections)
+            string[] graphic = PlaceParticipantsOnGraphic(section);
+            for (int i = 0; i < section.Graphic.Length; i++)
+            {
+                Console.SetCursorPosition(section.X * _width + _offsetX, section.Y * _height + _offsetY + i);
+                Console.Write(graphic[i]);
+                Thread.Sleep(25);
+            }
+        }
+
+        private static string[] PlaceParticipantsOnGraphic(Section section)
+        {
+
+            string[] graphic = (string[])section.Graphic.Clone();
+            SectionData data = _currentRace.GetSectionData(section);
+
+            for (int i = 0; i < section.Graphic.Length; i++)
+            {
+                if (!section.Graphic[i].Contains("L") && !section.Graphic[i].Contains("R"))
+                {
+                    graphic[i] = section.Graphic[i];
+                    continue;
+                }
+
+                if (data.Left != null)
+                    graphic[i] = graphic[i].Replace('L', data.Left.Name[0]);
+                else
+                    graphic[i] = graphic[i].Replace('L', ' ');
+
+                if (data.Right != null)
+                    graphic[i] = graphic[i].Replace('R', data.Right.Name[0]);
+                else
+                    graphic[i] = graphic[i].Replace('R', ' ');
+            }
+
+            return graphic;
+        }
+
+        private static void GenerateCoordinatesAndGraphics(Track track)
+        {
+            foreach (Section section in track.Sections)
             {
                 GenerateGraphics(section);
                 GenerateCoordinates(section);
             }
             _offsetX = Math.Abs(_offsetX);
             _offsetY = Math.Abs(_offsetY);
+            track.HasGeneratedSections = true;
         }
 
         private static void GenerateGraphics(Section section)
