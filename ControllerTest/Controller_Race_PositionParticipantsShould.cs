@@ -1,7 +1,6 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
 using Controller;
 using Model;
@@ -44,6 +43,19 @@ namespace ControllerTest
         }
 
         [Test]
+        public void PositionParticipants_PlaceThree_ShouldNotInBack()
+        {
+            Race.PositionParticipants(Track, Participants);
+
+            SectionData data = Race.GetSectionData(Race.Track.Sections.ElementAt(0));
+            Assert.IsNull(data.Left);
+            Assert.IsNull(data.Right);
+
+            data = Race.GetSectionData(Race.Track.Sections.ElementAt(0));
+            Assert.IsNull(data.Right);
+        }
+
+        [Test]
         public void PositionParticipants_ExceptionTooManyParticipants()
         {
             Participants.Add(new Driver("4", new Car(), TeamColors.Blue));
@@ -53,7 +65,14 @@ namespace ControllerTest
             Participants.Add(new Driver("8", new Car(), TeamColors.Blue));
             Participants.Add(new Driver("9", new Car(), TeamColors.Blue));
 
-            Assert.Throws<Exception>(Race.PositionParticipants(Track, Participants));
+            Assert.Throws<Exception>(() => { Race.PositionParticipants(Track, Participants);});
+        }
+
+        [Test]
+        public void PositionParticipants_ExceptionTooManyParticipants_WithNoStartGrids()
+        {
+            Track track = new Track("UnitTrack", new[] { SectionTypes.RightCorner, SectionTypes.RightCorner, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.RightCorner, SectionTypes.RightCorner, SectionTypes.Finish });
+            Assert.Throws<Exception>(() => { Race.PositionParticipants(track, Participants); });
         }
     }
 }

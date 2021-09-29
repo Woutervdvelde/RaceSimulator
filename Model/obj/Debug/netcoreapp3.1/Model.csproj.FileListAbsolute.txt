@@ -16,3 +16,13 @@ F:\git repository\Windesheim HBO\RaceSimulator\Model\obj\Debug\netcoreapp3.1\Mod
 F:\git repository\Windesheim HBO\RaceSimulator\Model\obj\Debug\netcoreapp3.1\Model.csproj.CoreCompileInputs.cache
 F:\git repository\Windesheim HBO\RaceSimulator\Model\obj\Debug\netcoreapp3.1\Model.dll
 F:\git repository\Windesheim HBO\RaceSimulator\Model\obj\Debug\netcoreapp3.1\Model.pdb
+C:\Users\woute\Documents\Projects\RaceSimulator\Model\bin\Debug\netcoreapp3.1\Model.deps.json
+C:\Users\woute\Documents\Projects\RaceSimulator\Model\bin\Debug\netcoreapp3.1\Model.dll
+C:\Users\woute\Documents\Projects\RaceSimulator\Model\bin\Debug\netcoreapp3.1\Model.pdb
+C:\Users\woute\Documents\Projects\RaceSimulator\Model\obj\Debug\netcoreapp3.1\Model.csproj.AssemblyReference.cache
+C:\Users\woute\Documents\Projects\RaceSimulator\Model\obj\Debug\netcoreapp3.1\Model.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\woute\Documents\Projects\RaceSimulator\Model\obj\Debug\netcoreapp3.1\Model.AssemblyInfoInputs.cache
+C:\Users\woute\Documents\Projects\RaceSimulator\Model\obj\Debug\netcoreapp3.1\Model.AssemblyInfo.cs
+C:\Users\woute\Documents\Projects\RaceSimulator\Model\obj\Debug\netcoreapp3.1\Model.csproj.CoreCompileInputs.cache
+C:\Users\woute\Documents\Projects\RaceSimulator\Model\obj\Debug\netcoreapp3.1\Model.dll
+C:\Users\woute\Documents\Projects\RaceSimulator\Model\obj\Debug\netcoreapp3.1\Model.pdb
