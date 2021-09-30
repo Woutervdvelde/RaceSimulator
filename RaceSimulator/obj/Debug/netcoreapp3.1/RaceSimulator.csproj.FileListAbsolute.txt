@@ -34,3 +34,22 @@ F:\git repository\Windesheim HBO\RaceSimulator\RaceSimulator\obj\Debug\netcoreap
 F:\git repository\Windesheim HBO\RaceSimulator\RaceSimulator\obj\Debug\netcoreapp3.1\RaceSimulator.dll
 F:\git repository\Windesheim HBO\RaceSimulator\RaceSimulator\obj\Debug\netcoreapp3.1\RaceSimulator.pdb
 F:\git repository\Windesheim HBO\RaceSimulator\RaceSimulator\obj\Debug\netcoreapp3.1\RaceSimulator.genruntimeconfig.cache
+C:\Users\woute\Documents\Projects\RaceSimulator\RaceSimulator\bin\Debug\netcoreapp3.1\RaceSimulator.exe
+C:\Users\woute\Documents\Projects\RaceSimulator\RaceSimulator\bin\Debug\netcoreapp3.1\RaceSimulator.deps.json
+C:\Users\woute\Documents\Projects\RaceSimulator\RaceSimulator\bin\Debug\netcoreapp3.1\RaceSimulator.runtimeconfig.json
+C:\Users\woute\Documents\Projects\RaceSimulator\RaceSimulator\bin\Debug\netcoreapp3.1\RaceSimulator.runtimeconfig.dev.json
+C:\Users\woute\Documents\Projects\RaceSimulator\RaceSimulator\bin\Debug\netcoreapp3.1\RaceSimulator.dll
+C:\Users\woute\Documents\Projects\RaceSimulator\RaceSimulator\bin\Debug\netcoreapp3.1\RaceSimulator.pdb
+C:\Users\woute\Documents\Projects\RaceSimulator\RaceSimulator\bin\Debug\netcoreapp3.1\Controller.dll
+C:\Users\woute\Documents\Projects\RaceSimulator\RaceSimulator\bin\Debug\netcoreapp3.1\Model.dll
+C:\Users\woute\Documents\Projects\RaceSimulator\RaceSimulator\bin\Debug\netcoreapp3.1\Controller.pdb
+C:\Users\woute\Documents\Projects\RaceSimulator\RaceSimulator\bin\Debug\netcoreapp3.1\Model.pdb
+C:\Users\woute\Documents\Projects\RaceSimulator\RaceSimulator\obj\Debug\netcoreapp3.1\RaceSimulator.csproj.AssemblyReference.cache
+C:\Users\woute\Documents\Projects\RaceSimulator\RaceSimulator\obj\Debug\netcoreapp3.1\RaceSimulator.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\woute\Documents\Projects\RaceSimulator\RaceSimulator\obj\Debug\netcoreapp3.1\RaceSimulator.AssemblyInfoInputs.cache
+C:\Users\woute\Documents\Projects\RaceSimulator\RaceSimulator\obj\Debug\netcoreapp3.1\RaceSimulator.AssemblyInfo.cs
+C:\Users\woute\Documents\Projects\RaceSimulator\RaceSimulator\obj\Debug\netcoreapp3.1\RaceSimulator.csproj.CoreCompileInputs.cache
+C:\Users\woute\Documents\Projects\RaceSimulator\RaceSimulator\obj\Debug\netcoreapp3.1\RaceSimulator.csproj.CopyComplete
+C:\Users\woute\Documents\Projects\RaceSimulator\RaceSimulator\obj\Debug\netcoreapp3.1\RaceSimulator.dll
+C:\Users\woute\Documents\Projects\RaceSimulator\RaceSimulator\obj\Debug\netcoreapp3.1\RaceSimulator.pdb
+C:\Users\woute\Documents\Projects\RaceSimulator\RaceSimulator\obj\Debug\netcoreapp3.1\RaceSimulator.genruntimeconfig.cache

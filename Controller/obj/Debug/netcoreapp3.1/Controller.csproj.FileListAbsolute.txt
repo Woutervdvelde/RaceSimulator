@@ -22,3 +22,16 @@ F:\git repository\Windesheim HBO\RaceSimulator\Controller\obj\Debug\netcoreapp3.
 F:\git repository\Windesheim HBO\RaceSimulator\Controller\obj\Debug\netcoreapp3.1\Controller.csproj.CopyComplete
 F:\git repository\Windesheim HBO\RaceSimulator\Controller\obj\Debug\netcoreapp3.1\Controller.dll
 F:\git repository\Windesheim HBO\RaceSimulator\Controller\obj\Debug\netcoreapp3.1\Controller.pdb
+C:\Users\woute\Documents\Projects\RaceSimulator\Controller\bin\Debug\netcoreapp3.1\Controller.deps.json
+C:\Users\woute\Documents\Projects\RaceSimulator\Controller\bin\Debug\netcoreapp3.1\Controller.dll
+C:\Users\woute\Documents\Projects\RaceSimulator\Controller\bin\Debug\netcoreapp3.1\Controller.pdb
+C:\Users\woute\Documents\Projects\RaceSimulator\Controller\bin\Debug\netcoreapp3.1\Model.dll
+C:\Users\woute\Documents\Projects\RaceSimulator\Controller\bin\Debug\netcoreapp3.1\Model.pdb
+C:\Users\woute\Documents\Projects\RaceSimulator\Controller\obj\Debug\netcoreapp3.1\Controller.csproj.AssemblyReference.cache
+C:\Users\woute\Documents\Projects\RaceSimulator\Controller\obj\Debug\netcoreapp3.1\Controller.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\woute\Documents\Projects\RaceSimulator\Controller\obj\Debug\netcoreapp3.1\Controller.AssemblyInfoInputs.cache
+C:\Users\woute\Documents\Projects\RaceSimulator\Controller\obj\Debug\netcoreapp3.1\Controller.AssemblyInfo.cs
+C:\Users\woute\Documents\Projects\RaceSimulator\Controller\obj\Debug\netcoreapp3.1\Controller.csproj.CoreCompileInputs.cache
+C:\Users\woute\Documents\Projects\RaceSimulator\Controller\obj\Debug\netcoreapp3.1\Controller.csproj.CopyComplete
+C:\Users\woute\Documents\Projects\RaceSimulator\Controller\obj\Debug\netcoreapp3.1\Controller.dll
+C:\Users\woute\Documents\Projects\RaceSimulator\Controller\obj\Debug\netcoreapp3.1\Controller.pdb

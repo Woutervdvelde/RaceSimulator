@@ -11,12 +11,9 @@ namespace RaceSimulator
         {
             Data.Initialize();
             Data.NextRace();
-            Console.WriteLine(Data.CurrentRace.Track.Name);
 
-            Console.WriteLine("Participants:");
-            Data.CurrentRace.Participants.ForEach(participant => {
-                Console.WriteLine($"\t - {participant.Name}");
-            });
+            Visual.Initialize(Data.CurrentRace);
+            Visual.DrawTrack(Data.CurrentRace.Track);
 
             for (; ; )
             {
