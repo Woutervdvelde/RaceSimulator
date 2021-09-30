@@ -42,5 +42,19 @@ namespace Model
             }
             return sectionList;
         }
+
+        public Section GetNextSectionAfter(Section section)
+        {
+            bool foundCurrent = false;
+            foreach (Section sections in Sections)
+            {
+                if (foundCurrent)
+                    return section;
+
+                foundCurrent = sections == section;
+            }
+
+            return section;
+        }
     }
 }

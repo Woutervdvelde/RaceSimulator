@@ -29,6 +29,7 @@ namespace RaceSimulator
             _lastY = 0;
             _offsetX = 0;
             _offsetY = 0;
+            Data.CurrentRace.DriversChanged += OnDriversChanged;
         }
 
         #region graphics
@@ -97,6 +98,13 @@ namespace RaceSimulator
             }
 
             return graphic;
+        }
+
+        public static void OnDriversChanged(object source, EventArgs args)
+        {
+            DriversChangedEventArgs driverArgs = args as DriversChangedEventArgs;
+            if (driverArgs != null)
+                DrawTrack(driverArgs.Track);
         }
 
         private static void GenerateCoordinatesAndGraphics(Track track)

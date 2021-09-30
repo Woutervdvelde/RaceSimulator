@@ -21,6 +21,7 @@ namespace Controller
         public Track Track { get; set; }
         public List<IParticipant> Participants { get; set; }
         public DateTime StartTime { get; set; }
+        public event EventHandler DriversChanged;
 
         private Random _random;
         private Dictionary<Section, SectionData> _positions;
@@ -35,6 +36,7 @@ namespace Controller
             _timer = new Timer(500);
             _timer.Elapsed += OnTimedEvent;
             PositionParticipants(track, participants);
+            RandomizeEquipment();
         }
 
         public void Start()
@@ -42,9 +44,9 @@ namespace Controller
             _timer.Start();
         }
 
-        private static void OnTimedEvent(Object source, ElapsedEventArgs args)
+        private void OnTimedEvent(Object source, ElapsedEventArgs args)
         {
-
+            MoveParticipants();
         }
 
         public SectionData GetSectionData(Section section)
@@ -61,8 +63,9 @@ namespace Controller
         {
             Participants.ForEach(_participant =>
             {
-                _participant.Equipment.Quality = _random.Next(0, 10);
-                _participant.Equipment.Performance = _random.Next(0, 10);
+                _participant.Equipment.Quality = _random.Next(1, 10);
+                _participant.Equipment.Performance = _random.Next(1, 10);
+                _participant.Equipment.Performance = _random.Next(1, 10);
             });
         }
 
@@ -83,6 +86,30 @@ namespace Controller
                 else
                     data.Right = participants[i];
             }
+        }
+
+        public void MoveParticipants()
+        {
+            foreach (Section section in Track.Sections)
+            {
+                SectionData data = GetSectionData(section);
+                if (data.Left != null)
+                    data.DistanceLeft += data.Left.Equipment.Performance * data.Left.Equipment.Speed;
+
+                if (data.Right != null)
+                    data.DistanceRight += data.Right.Equipment.Performance * data.Right.Equipment.Speed;
+
+                if (data.DistanceLeft > Section.Length)
+                    MoveToNext();
+
+                if (data.DistanceRight > Section.Length)
+                    MoveToNext();
+            }
+        }
+
+        public void MoveToNext()
+        {
+
         }
     }
 }
