@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Timers;
 using Model;
 
 namespace Controller
@@ -23,6 +24,7 @@ namespace Controller
 
         private Random _random;
         private Dictionary<Section, SectionData> _positions;
+        private Timer _timer;
 
         public Race(Track track, List<IParticipant> participants)
         {
@@ -30,7 +32,19 @@ namespace Controller
             Participants = participants;
             _random = new Random(DateTime.Now.Millisecond);
             _positions = new Dictionary<Section, SectionData>();
+            _timer = new Timer(500);
+            _timer.Elapsed += OnTimedEvent;
             PositionParticipants(track, participants);
+        }
+
+        public void Start()
+        {
+            _timer.Start();
+        }
+
+        private static void OnTimedEvent(Object source, ElapsedEventArgs args)
+        {
+
         }
 
         public SectionData GetSectionData(Section section)
