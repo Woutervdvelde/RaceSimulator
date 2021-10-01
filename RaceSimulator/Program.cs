@@ -15,6 +15,8 @@ namespace RaceSimulator
             Visual.Initialize(Data.CurrentRace);
             Visual.DrawTrack(Data.CurrentRace.Track);
 
+            Data.CurrentRace.Start();
+
             for (; ; )
             {
                 Thread.Sleep(100);

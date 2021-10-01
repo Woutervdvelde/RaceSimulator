@@ -55,6 +55,7 @@ namespace Controller
                 return sectionData;
 
             sectionData = new SectionData();
+            sectionData.Section = section;
             _positions.Add(section, sectionData);
             return sectionData;
         }
@@ -65,7 +66,7 @@ namespace Controller
             {
                 _participant.Equipment.Quality = _random.Next(1, 10);
                 _participant.Equipment.Performance = _random.Next(1, 10);
-                _participant.Equipment.Performance = _random.Next(1, 10);
+                _participant.Equipment.Speed = _random.Next(1, 10);
             });
         }
 
@@ -73,7 +74,7 @@ namespace Controller
         {
             LinkedList<Section> startSections = track.GetStartSections();
 
-            if (startSections.Count < participants.Count)
+            if (startSections.Count * 2 < participants.Count)
                 throw new Exception("Not enough start grids for participants");
 
             for (int i = 0; i < participants.Count; i++)
@@ -100,16 +101,53 @@ namespace Controller
                     data.DistanceRight += data.Right.Equipment.Performance * data.Right.Equipment.Speed;
 
                 if (data.DistanceLeft > Section.Length)
-                    MoveToNext();
+                    MoveToNext(section, data.Left);
 
                 if (data.DistanceRight > Section.Length)
-                    MoveToNext();
+                    MoveToNext(section, data.Right);
+
+                if (data.Waiting.Count > 0)
+                    CheckWaiting(section, data);
             }
         }
 
-        public void MoveToNext()
+        public void MoveToNext(Section currentSection, IParticipant participant)
         {
+            Section nextSection = Track.GetNextSection(currentSection);
+            SectionData nextData = GetSectionData(nextSection);
+            nextData.Waiting.Enqueue(participant);
+        }
 
+        public void CheckWaiting(Section currentSection, SectionData data)
+        {
+            Section prevSection = Track.GetPreviousSection(currentSection);
+            SectionData prevData = GetSectionData(prevSection);
+
+            if (data.Left != null && data.Right != null)
+                return;
+
+            if (data.Waiting.Count < 2)
+            {
+                data.Waiting.TryDequeue(out IParticipant p);
+                if (data.Left == null)
+                    data.Left = p;
+                if (data.Right == null)
+                    data.Right = p;
+
+                if (prevData.Left == p)
+                {
+                    prevData.Left = null;
+                    prevData.DistanceLeft = 0;
+                }
+                if (prevData.Right == p) 
+                {
+                    prevData.Right = null;
+                    prevData.DistanceRight = 0;
+                }
+            }
+
+            DriversChangedEventArgs args = new DriversChangedEventArgs(Track);
+            DriversChanged.Invoke(this, args);
         }
     }
 }
