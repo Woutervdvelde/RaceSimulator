@@ -46,27 +46,36 @@ namespace Model
         public Section GetNextSection(Section section)
         {
             bool foundCurrent = false;
-            foreach (Section s in Sections)
+            for (var s = Sections.First; s.Next != null; s = s.Next)
             {
                 if (foundCurrent)
-                    return section;
-
-                foundCurrent = s == section;
+                    return s.Value;
+                foundCurrent = s.Value.Equals(section);
             }
             return section;
         }
 
         public Section GetPreviousSection(Section section)
         {
-            Section previousSection = section;
-            foreach (Section s in Sections)
-            {
-                if (s == section)
-                    return previousSection;
+            //Section previousSection = section;
+            //foreach (Section s in Sections)
+            //{
+            //    if (s == section)
+            //        return previousSection;
+            //
+            //    previousSection = s;
+            //}
+            //return previousSection;
 
-                previousSection = s;
+            Section prevSection = section;
+            for (var s = Sections.First; s.Next != null; s = s.Next)
+            {
+                if (s.Value.Equals(section))
+                    return prevSection;
+
+                prevSection = s.Value;
             }
-            return previousSection;
+            return section;
         }
     }
 }

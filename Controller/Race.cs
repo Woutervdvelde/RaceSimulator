@@ -26,6 +26,7 @@ namespace Controller
         private Random _random;
         private Dictionary<Section, SectionData> _positions;
         private Timer _timer;
+        private bool _needsUpdate;
 
         public Race(Track track, List<IParticipant> participants)
         {
@@ -109,13 +110,22 @@ namespace Controller
                 if (data.Waiting.Count > 0)
                     CheckWaiting(section, data);
             }
+
+            if (_needsUpdate)
+            {
+                DriversChangedEventArgs args = new DriversChangedEventArgs(Track);
+                DriversChanged.Invoke(this, args);
+                _needsUpdate = false;
+            }
         }
 
         public void MoveToNext(Section currentSection, IParticipant participant)
         {
             Section nextSection = Track.GetNextSection(currentSection);
             SectionData nextData = GetSectionData(nextSection);
-            nextData.Waiting.Enqueue(participant);
+
+            if (!nextData.Waiting.Contains(participant))
+                nextData.Waiting.Enqueue(participant);
         }
 
         public void CheckWaiting(Section currentSection, SectionData data)
@@ -126,28 +136,29 @@ namespace Controller
             if (data.Left != null && data.Right != null)
                 return;
 
-            if (data.Waiting.Count < 2)
-            {
-                data.Waiting.TryDequeue(out IParticipant p);
-                if (data.Left == null)
-                    data.Left = p;
-                if (data.Right == null)
-                    data.Right = p;
+            IParticipant p = data.Waiting.Dequeue();
+            if (data.Left == null)
+                SetParticipantData(data.Left, p, prevData.Left, prevData.DistanceLeft);
+            else if (data.Right == null)
+                SetParticipantData(data.Right, p, prevData.Right, prevData.DistanceRight);
 
-                if (prevData.Left == p)
-                {
-                    prevData.Left = null;
-                    prevData.DistanceLeft = 0;
-                }
-                if (prevData.Right == p) 
-                {
-                    prevData.Right = null;
-                    prevData.DistanceRight = 0;
-                }
+            if (data.Waiting.Count > 0 && (data.Left == null || data.Right == null))
+            {
+                IParticipant p2 = data.Waiting.Dequeue();
+                if (data.Left == null)
+                    SetParticipantData(data.Left, p2, prevData.Left, prevData.DistanceLeft);
+                else if (data.Right == null)
+                    SetParticipantData(data.Right, p2, prevData.Right, prevData.DistanceRight);
             }
 
-            DriversChangedEventArgs args = new DriversChangedEventArgs(Track);
-            DriversChanged.Invoke(this, args);
+            _needsUpdate = true;
+        }
+
+        public void SetParticipantData(IParticipant oldP, IParticipant newP, IParticipant prevP, int prevDistance)
+        {
+            oldP = newP;
+            prevP = null;
+            prevDistance = 0;
         }
     }
 }
