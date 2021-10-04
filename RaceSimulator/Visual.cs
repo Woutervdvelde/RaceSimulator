@@ -34,24 +34,23 @@ namespace RaceSimulator
 
         #region graphics
 
-        public static string CarDefault = "█";
-
         private static int _width = 9;
         private static int _height = 4;
-        private static string[] _startHorizontal = { "═════════", "      L] ", " R]      ", "═════════" };
-        private static string[] _finishHorizontal = { "════░════", "  L ░    ", "  R ░    ", "════░════" };
-        private static string[] _straightHorizontal = { "═════════", "    L    ", "    R    ", "═════════" };
-        private static string[] _straightVertical = { "║       ║", "║       ║", "║ L   R ║", "║       ║" };
+        private static string[] _startHorizontal = { "═════════", "      1] ", " 2]      ", "═════════" };
+        private static string[] _finishHorizontal = { "════░════", "  1 ░    ", "  2 ░    ", "════░════" };
+        private static string[] _straightHorizontal = { "═════════", "    1    ", "    2    ", "═════════" };
+        private static string[] _straightVertical = { "║       ║", "║       ║", "║ 1   2 ║", "║       ║" };
 
-        private static string[] _cornerNorthWest = { "╝       ║", "  L  R  ║", "        ║", "════════╝" };
-        private static string[] _cornerNorthEast = { "║       ╚", "║  L  R  ", "║        ", "╚════════" };
-        private static string[] _cornerSouthWest = { "════════╗", "        ║", " L   R  ║", "╗       ║" };
-        private static string[] _cornerSouthEast = { "╔════════", "║        ", "║  L  R  ", "║       ╔" };
+        private static string[] _cornerNorthWest = { "╝       ║", "  1  2  ║", "        ║", "════════╝" };
+        private static string[] _cornerNorthEast = { "║       ╚", "║  1  2  ", "║        ", "╚════════" };
+        private static string[] _cornerSouthWest = { "════════╗", "        ║", " 1   2  ║", "╗       ║" };
+        private static string[] _cornerSouthEast = { "╔════════", "║        ", "║  1  2  ", "║       ╔" };
 
         #endregion
 
         public static void DrawTrack(Track track)
         {
+            Console.Clear();
             if (!track.HasGeneratedSections)
                 GenerateCoordinatesAndGraphics(track);
 
@@ -68,7 +67,6 @@ namespace RaceSimulator
             {
                 Console.SetCursorPosition(section.X * _width + _offsetX, section.Y * _height + _offsetY + i);
                 Console.Write(graphic[i]);
-                Thread.Sleep(25);
             }
         }
 
@@ -80,21 +78,21 @@ namespace RaceSimulator
 
             for (int i = 0; i < section.Graphic.Length; i++)
             {
-                if (!section.Graphic[i].Contains("L") && !section.Graphic[i].Contains("R"))
+                if (!section.Graphic[i].Contains("1") && !section.Graphic[i].Contains("2"))
                 {
                     graphic[i] = section.Graphic[i];
                     continue;
                 }
 
                 if (data.Left != null)
-                    graphic[i] = graphic[i].Replace('L', data.Left.Name[0]);
+                    graphic[i] = graphic[i].Replace('1', data.Left.Name[0]);
                 else
-                    graphic[i] = graphic[i].Replace('L', ' ');
+                    graphic[i] = graphic[i].Replace('1', ' ');
 
                 if (data.Right != null)
-                    graphic[i] = graphic[i].Replace('R', data.Right.Name[0]);
+                    graphic[i] = graphic[i].Replace('2', data.Right.Name[0]);
                 else
-                    graphic[i] = graphic[i].Replace('R', ' ');
+                    graphic[i] = graphic[i].Replace('2', ' ');
             }
 
             return graphic;
