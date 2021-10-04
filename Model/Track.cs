@@ -57,22 +57,12 @@ namespace Model
 
         public Section GetPreviousSection(Section section)
         {
-            //Section previousSection = section;
-            //foreach (Section s in Sections)
-            //{
-            //    if (s == section)
-            //        return previousSection;
-            //
-            //    previousSection = s;
-            //}
-            //return previousSection;
-
             Section prevSection = section;
             for (var s = Sections.First; s.Next != null; s = s.Next)
             {
                 if (s.Value.Equals(section))
                     return prevSection;
-
+            
                 prevSection = s.Value;
             }
             return section;
