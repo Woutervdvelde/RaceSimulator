@@ -52,12 +52,12 @@ namespace Model
                     return s.Value;
                 foundCurrent = s.Value.Equals(section);
             }
-            return section;
+            return Sections.First.Value;
         }
 
         public Section GetPreviousSection(Section section)
         {
-            Section prevSection = section;
+            Section prevSection = Sections.Last.Value;
             for (var s = Sections.First; s.Next != null; s = s.Next)
             {
                 if (s.Value.Equals(section))
@@ -65,7 +65,7 @@ namespace Model
             
                 prevSection = s.Value;
             }
-            return section;
+            return Sections.Last.Value;
         }
     }
 }

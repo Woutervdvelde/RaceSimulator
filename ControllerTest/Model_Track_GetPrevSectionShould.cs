@@ -15,7 +15,7 @@ namespace ControllerTest
         [SetUp]
         public void SetUp()
         {
-            _track = new Track("UnitTrack", new SectionTypes[] { SectionTypes.StartGrid, SectionTypes.StartGrid, SectionTypes.StartGrid, SectionTypes.Straight, SectionTypes.Finish });
+            _track = new Track("UnitTrack", new SectionTypes[] { SectionTypes.StartGrid, SectionTypes.Straight, SectionTypes.Finish });
         }
 
         [Test]
@@ -49,12 +49,13 @@ namespace ControllerTest
         }
 
         [Test]
-        public void GetPrevSection_ReturnInputIfNotFound()
+        public void GetPrevSection_ReturnLastIfNotFound()
         {
-            Section search = new Section(SectionTypes.Finish);
+            Section search = _track.Sections.ElementAt(0);
+            Section expected = _track.Sections.ElementAt(2);
             Section result = _track.GetPreviousSection(search);
 
-            Assert.AreEqual(search, result);
+            Assert.AreEqual(expected, result);
         }
 
     }

@@ -138,27 +138,36 @@ namespace Controller
 
             IParticipant p = data.Waiting.Dequeue();
             if (data.Left == null)
-                SetParticipantData(data.Left, p, prevData.Left, prevData.DistanceLeft);
+            {
+                data.Left = p;
+                prevData.Left = null;
+                prevData.DistanceLeft = 0;
+            }
             else if (data.Right == null)
-                SetParticipantData(data.Right, p, prevData.Right, prevData.DistanceRight);
+            {
+                data.Right = p;
+                prevData.Right = null;
+                prevData.DistanceRight = 0;
+            }
 
             if (data.Waiting.Count > 0 && (data.Left == null || data.Right == null))
             {
                 IParticipant p2 = data.Waiting.Dequeue();
                 if (data.Left == null)
-                    SetParticipantData(data.Left, p2, prevData.Left, prevData.DistanceLeft);
+                {
+                    data.Left = p2;
+                    prevData.Left = null;
+                    prevData.DistanceLeft = 0;
+                }
                 else if (data.Right == null)
-                    SetParticipantData(data.Right, p2, prevData.Right, prevData.DistanceRight);
+                {
+                    data.Right = p2;
+                    prevData.Right = null;
+                    prevData.DistanceRight = 0;
+                }
             }
 
             _needsUpdate = true;
-        }
-
-        public void SetParticipantData(IParticipant oldP, IParticipant newP, IParticipant prevP, int prevDistance)
-        {
-            oldP = newP;
-            prevP = null;
-            prevDistance = 0;
         }
     }
 }

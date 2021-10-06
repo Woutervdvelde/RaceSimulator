@@ -48,12 +48,13 @@ namespace ControllerTest
         }
 
         [Test]
-        public void GetNextSection_ReturnInputIfNotFound()
+        public void GetNextSection_ReturnFirstIfNotFound()
         {
-            Section search = new Section(SectionTypes.Finish);
+            Section search = _track.Sections.ElementAt(2);
+            Section expected = _track.Sections.ElementAt(0);
             Section result = _track.GetNextSection(search);
 
-            Assert.AreEqual(search, result);
+            Assert.AreEqual(expected, result);
         }
     }
 }
