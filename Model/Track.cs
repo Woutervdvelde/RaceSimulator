@@ -46,11 +46,12 @@ namespace Model
         public Section GetNextSection(Section section)
         {
             bool foundCurrent = false;
-            for (var s = Sections.First; s.Next != null; s = s.Next)
+            foreach(Section s in Sections)
             {
                 if (foundCurrent)
-                    return s.Value;
-                foundCurrent = s.Value.Equals(section);
+                    return s;
+
+                foundCurrent = s.Equals(section);
             }
             return Sections.First.Value;
         }
@@ -58,12 +59,12 @@ namespace Model
         public Section GetPreviousSection(Section section)
         {
             Section prevSection = Sections.Last.Value;
-            for (var s = Sections.First; s.Next != null; s = s.Next)
+            foreach (Section s in Sections)
             {
-                if (s.Value.Equals(section))
+                if (s.Equals(section))
                     return prevSection;
-            
-                prevSection = s.Value;
+
+                prevSection = s;
             }
             return Sections.Last.Value;
         }

@@ -58,5 +58,15 @@ namespace ControllerTest
             Assert.AreEqual(expected, result);
         }
 
+
+        [Test]
+        public void GetPrevSection_ReturnOneBeforeLastIfLastIsInput()
+        {
+            Section search = _track.Sections.ElementAt(2);
+            Section expected = _track.Sections.ElementAt(1);
+            Section result = _track.GetPreviousSection(search);
+
+            Assert.AreEqual(expected, result);
+        }
     }
 }
