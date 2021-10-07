@@ -68,5 +68,14 @@ namespace ControllerTest
 
             Assert.AreEqual(expected, result);
         }
+
+        public void GetPrevSection_ReturnLastIfInputNotFound()
+        {
+            Section search = new Section(SectionTypes.Finish);
+            Section expected = _track.Sections.ElementAt(2);
+            Section result = _track.GetPreviousSection(search);
+
+            Assert.AreEqual(expected, result);
+        }
     }
 }

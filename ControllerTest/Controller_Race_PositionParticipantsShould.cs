@@ -11,68 +11,68 @@ namespace ControllerTest
 
     class Controller_Race_PositionParticipantsShould
     {
-        public Race Race;
-        public Track Track;
-        public List<IParticipant> Participants;
+        private Race _race;
+        private Track _track;
+        private List<IParticipant> _participants;
 
         [SetUp]
         public void SetUp()
         {
-            Track = new Track("UnitTrack", new[] { SectionTypes.StartGrid, SectionTypes.StartGrid, SectionTypes.StartGrid, SectionTypes.RightCorner, SectionTypes.RightCorner, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.RightCorner, SectionTypes.RightCorner, SectionTypes.Finish });
+            _track = new Track("UnitTrack", new[] { SectionTypes.StartGrid, SectionTypes.StartGrid, SectionTypes.StartGrid, SectionTypes.RightCorner, SectionTypes.RightCorner, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.RightCorner, SectionTypes.RightCorner, SectionTypes.Finish });
 
-            Participants = new List<IParticipant>();
-            Participants.Add(new Driver("1", new Car(), TeamColors.Blue));
-            Participants.Add(new Driver("2", new Car(), TeamColors.Blue));
-            Participants.Add(new Driver("3", new Car(), TeamColors.Blue));
+            _participants = new List<IParticipant>();
+            _participants.Add(new Driver("1", new Car(), TeamColors.Blue));
+            _participants.Add(new Driver("2", new Car(), TeamColors.Blue));
+            _participants.Add(new Driver("3", new Car(), TeamColors.Blue));
 
-            Race = new Race(Track, Participants);
+            _race = new Race(_track, _participants);
         }
 
         [Test]
         public void PositionParticipants_PlaceThreeParticpantsInFront()
         {
-            Race.PositionParticipants(Track, Participants);
+            _race.PositionParticipants(_track, _participants);
 
-            SectionData data = Race.GetSectionData(Race.Track.Sections.ElementAt(2));
-            Assert.AreEqual(data.Left.Name, Participants[0].Name);
-            Assert.AreEqual(data.Right.Name, Participants[1].Name);
+            SectionData data = _race.GetSectionData(_race.Track.Sections.ElementAt(2));
+            Assert.AreEqual(data.Left.Name, _participants[0].Name);
+            Assert.AreEqual(data.Right.Name, _participants[1].Name);
 
-            data = Race.GetSectionData(Race.Track.Sections.ElementAt(1));
-            Assert.AreEqual(data.Left.Name, Participants[2].Name);
+            data = _race.GetSectionData(_race.Track.Sections.ElementAt(1));
+            Assert.AreEqual(data.Left.Name, _participants[2].Name);
             Assert.IsNull(data.Right);
         }
 
         [Test]
         public void PositionParticipants_PlaceThree_ShouldNotInBack()
         {
-            Race.PositionParticipants(Track, Participants);
+            _race.PositionParticipants(_track, _participants);
 
-            SectionData data = Race.GetSectionData(Race.Track.Sections.ElementAt(0));
+            SectionData data = _race.GetSectionData(_race.Track.Sections.ElementAt(0));
             Assert.IsNull(data.Left);
             Assert.IsNull(data.Right);
 
-            data = Race.GetSectionData(Race.Track.Sections.ElementAt(0));
+            data = _race.GetSectionData(_race.Track.Sections.ElementAt(0));
             Assert.IsNull(data.Right);
         }
 
         [Test]
         public void PositionParticipants_ExceptionTooManyParticipants()
         {
-            Participants.Add(new Driver("4", new Car(), TeamColors.Blue));
-            Participants.Add(new Driver("5", new Car(), TeamColors.Blue));
-            Participants.Add(new Driver("6", new Car(), TeamColors.Blue));
-            Participants.Add(new Driver("7", new Car(), TeamColors.Blue));
-            Participants.Add(new Driver("8", new Car(), TeamColors.Blue));
-            Participants.Add(new Driver("9", new Car(), TeamColors.Blue));
+            _participants.Add(new Driver("4", new Car(), TeamColors.Blue));
+            _participants.Add(new Driver("5", new Car(), TeamColors.Blue));
+            _participants.Add(new Driver("6", new Car(), TeamColors.Blue));
+            _participants.Add(new Driver("7", new Car(), TeamColors.Blue));
+            _participants.Add(new Driver("8", new Car(), TeamColors.Blue));
+            _participants.Add(new Driver("9", new Car(), TeamColors.Blue));
 
-            Assert.Throws<Exception>(() => { Race.PositionParticipants(Track, Participants);});
+            Assert.Throws<Exception>(() => { _race.PositionParticipants(_track, _participants);});
         }
 
         [Test]
         public void PositionParticipants_ExceptionTooManyParticipants_WithNoStartGrids()
         {
             Track track = new Track("UnitTrack", new[] { SectionTypes.RightCorner, SectionTypes.RightCorner, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.RightCorner, SectionTypes.RightCorner, SectionTypes.Finish });
-            Assert.Throws<Exception>(() => { Race.PositionParticipants(track, Participants); });
+            Assert.Throws<Exception>(() => { _race.PositionParticipants(track, _participants); });
         }
     }
 }

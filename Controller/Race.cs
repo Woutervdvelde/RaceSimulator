@@ -65,9 +65,9 @@ namespace Controller
         {
             Participants.ForEach(_participant =>
             {
-                _participant.Equipment.Quality = _random.Next(1, 10);
-                _participant.Equipment.Performance = _random.Next(1, 10);
-                _participant.Equipment.Speed = _random.Next(1, 10);
+                _participant.Equipment.Quality = _random.Next(3, 10);
+                _participant.Equipment.Performance = _random.Next(3, 10);
+                _participant.Equipment.Speed = _random.Next(3, 10);
             });
         }
 
@@ -107,10 +107,10 @@ namespace Controller
                 if (data.Right != null)
                     data.DistanceRight += data.Right.Equipment.Performance * data.Right.Equipment.Speed;
 
-                if (data.DistanceLeft > Section.Length)
+                if (data.DistanceLeft >= Section.Length)
                     MoveToNext(section, data.Left);
 
-                if (data.DistanceRight > Section.Length)
+                if (data.DistanceRight >= Section.Length)
                     MoveToNext(section, data.Right);
 
                 if (data.Waiting.Count > 0)
@@ -120,7 +120,7 @@ namespace Controller
             if (_needsUpdate)
             {
                 DriversChangedEventArgs args = new DriversChangedEventArgs(Track);
-                DriversChanged.Invoke(this, args);
+                DriversChanged?.Invoke(this, args);
                 _needsUpdate = false;
             }
         }
