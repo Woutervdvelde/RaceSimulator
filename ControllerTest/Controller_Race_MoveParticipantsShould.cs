@@ -71,5 +71,25 @@ namespace ControllerTest
             Assert.AreNotEqual(null, data.Left);
             Assert.AreNotEqual(null, data.Right);
         }
+
+        [Test]
+        public void MoveParticipants_AddToWaitingOnStartWhenOnFinish()
+        {
+            Track track = new Track("UnitTrack", new[] { SectionTypes.StartGrid, SectionTypes.RightCorner, SectionTypes.RightCorner, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.RightCorner, SectionTypes.RightCorner, SectionTypes.Finish });
+            List<IParticipant> participants = new List<IParticipant>();
+            participants.Add(new Driver("1", new Car(), TeamColors.Blue));
+            Race race = new Race(_track, _participants);
+
+            race.Participants[0].Equipment.Performance = 10;
+            race.Participants[0].Equipment.Speed = 10;
+
+            SectionData finish = race.GetSectionData(race.Track.Sections.Last.Value);
+            finish.Left = race.Participants[0];
+
+            race.MoveParticipants();
+
+            SectionData start = race.GetSectionData(race.Track.Sections.First.Value);
+            Assert.AreEqual(race.Participants[0], start.Waiting.Dequeue());
+        }
     }
 }
