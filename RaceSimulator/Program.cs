@@ -15,6 +15,7 @@ namespace RaceSimulator
             Visual.Initialize(Data.CurrentRace);
             Visual.DrawTrack(Data.CurrentRace.Track);
 
+            Data.CurrentRace.RaceFinished += NextRace;
             Data.CurrentRace.Start();
 
             for (; ; )
@@ -23,6 +24,18 @@ namespace RaceSimulator
                 //if (Console.ReadKey(true).Key == ConsoleKey.Enter)
                 //    Data.CurrentRace.MoveParticipants();
             }
+        }
+
+        static void NextRace(object source, EventArgs args)
+        {
+            Data.CurrentRace.RaceFinished -= NextRace;
+            Data.NextRace();
+
+            Visual.Initialize(Data.CurrentRace);
+            Visual.DrawTrack(Data.CurrentRace.Track);
+
+            Data.CurrentRace.RaceFinished += NextRace;
+            Data.CurrentRace.Start();
         }
     }
 }

@@ -20,20 +20,28 @@ namespace Controller
          */
         public Track Track { get; set; }
         public List<IParticipant> Participants { get; set; }
+        public int Laps { get; set; }
+
         public DateTime StartTime { get; set; }
         public event EventHandler DriversChanged;
+        public event EventHandler RaceFinished;
 
         private Random _random;
         private Dictionary<Section, SectionData> _positions;
+        private Dictionary<IParticipant, int> _laps;
+        private LinkedList<IParticipant> _leaderboard;
         private Timer _timer;
         private bool _needsUpdate;
 
-        public Race(Track track, List<IParticipant> participants)
+        public Race(Track track, List<IParticipant> participants, int laps)
         {
             Track = track;
             Participants = participants;
+            Laps = laps;
             _random = new Random(DateTime.Now.Millisecond);
             _positions = new Dictionary<Section, SectionData>();
+            InitializeLaps();
+            _leaderboard = new LinkedList<IParticipant>();
             _timer = new Timer(500);
             _timer.Elapsed += OnTimedEvent;
             PositionParticipants(track, participants);
@@ -93,6 +101,43 @@ namespace Controller
                     data.Right = participants[i];
                     participants[i].IsLeft = false;
                 }
+            }
+        }
+
+        public void InitializeLaps()
+        {
+            _laps = new Dictionary<IParticipant, int>();
+
+            foreach (IParticipant p in Participants)
+                _laps.Add(p, 0);
+        }
+
+        public void AddParticipantLap(IParticipant p)
+        {
+            _laps[p] += 1;
+            if (_laps[p] >= Laps)
+                ParticipantFinished(p);
+        }
+
+        public void ParticipantFinished(IParticipant p)
+        {
+            SectionData data = GetSectionData(Track.Sections.First.Value);
+            if (data.Left == p)
+                data.Left = null;
+            if (data.Right == p)
+                data.Right = null;
+
+            _leaderboard.AddLast(p);
+            CheckFinished();
+        }
+
+        public void CheckFinished()
+        {
+            if (_leaderboard.Count == Participants.Count)
+            {
+                _timer.Elapsed -= OnTimedEvent;
+                _timer.Stop();
+                RaceFinished.Invoke(this, new EventArgs());
             }
         }
 
@@ -171,6 +216,8 @@ namespace Controller
                 }
                 p.IsLeft = false;
             }
+            if (prevSection.SectionType == SectionTypes.Finish)
+                AddParticipantLap(p);
 
             if (data.Waiting.Count > 0 && (data.Left == null || data.Right == null))
             {
@@ -205,6 +252,8 @@ namespace Controller
                     }
                     p2.IsLeft = false;
                 }
+                if (prevSection.SectionType == SectionTypes.Finish)
+                    AddParticipantLap(p2);
             }
 
             _needsUpdate = true;

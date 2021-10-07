@@ -11,7 +11,7 @@ namespace Model
         public int Y { get; set; }
         public string[] Graphic { get; set; }
 
-        public static int Length = 100;
+        public static int Length = 1;
 
         public Section(SectionTypes sectionType)
         {
