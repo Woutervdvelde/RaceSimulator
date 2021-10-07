@@ -20,6 +20,8 @@ namespace RaceSimulator
             for (; ; )
             {
                 Thread.Sleep(100);
+                //if (Console.ReadKey(true).Key == ConsoleKey.Enter)
+                //    Data.CurrentRace.MoveParticipants();
             }
         }
     }

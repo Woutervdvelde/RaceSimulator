@@ -84,9 +84,15 @@ namespace Controller
                 SectionData data = GetSectionData(startSections.ElementAt(index));
 
                 if (i % 2 == 0)
+                {
                     data.Left = participants[i];
+                    participants[i].IsLeft = true;
+                }
                 else
+                {
                     data.Right = participants[i];
+                    participants[i].IsLeft = false;
+                }
             }
         }
 
@@ -140,14 +146,30 @@ namespace Controller
             if (data.Left == null)
             {
                 data.Left = p;
-                prevData.Left = null;
-                prevData.DistanceLeft = 0;
+                if (p.IsLeft)
+                {
+                    prevData.Left = null;
+                    prevData.DistanceLeft = 0;
+                } else
+                {
+                    prevData.Right = null;
+                    prevData.DistanceRight = 0;
+                }
+                p.IsLeft = true;
             }
             else if (data.Right == null)
             {
                 data.Right = p;
-                prevData.Right = null;
-                prevData.DistanceRight = 0;
+                if (p.IsLeft)
+                {
+                    prevData.Left = null;
+                    prevData.DistanceLeft = 0;
+                } else
+                {
+                    prevData.Right = null;
+                    prevData.DistanceRight = 0;
+                }
+                p.IsLeft = false;
             }
 
             if (data.Waiting.Count > 0 && (data.Left == null || data.Right == null))
@@ -156,14 +178,32 @@ namespace Controller
                 if (data.Left == null)
                 {
                     data.Left = p2;
-                    prevData.Left = null;
-                    prevData.DistanceLeft = 0;
+                    if (p2.IsLeft)
+                    {
+                        prevData.Left = null;
+                        prevData.DistanceLeft = 0;
+                    }
+                    else
+                    {
+                        prevData.Right = null;
+                        prevData.DistanceRight = 0;
+                    }
+                    p2.IsLeft = true;
                 }
                 else if (data.Right == null)
                 {
                     data.Right = p2;
-                    prevData.Right = null;
-                    prevData.DistanceRight = 0;
+                    if (p2.IsLeft)
+                    {
+                        prevData.Left = null;
+                        prevData.DistanceLeft = 0;
+                    }
+                    else
+                    {
+                        prevData.Right = null;
+                        prevData.DistanceRight = 0;
+                    }
+                    p2.IsLeft = false;
                 }
             }
 
