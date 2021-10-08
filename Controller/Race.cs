@@ -157,10 +157,9 @@ namespace Controller
 
                 if (data.DistanceRight >= Section.Length)
                     MoveToNext(section, data.Right);
-
-                if (data.Waiting.Count > 0)
-                    CheckWaiting(section, data);
             }
+
+            CheckAllWaiting();
 
             if (_needsUpdate)
             {
@@ -177,6 +176,18 @@ namespace Controller
 
             if (!nextData.Waiting.Contains(participant))
                 nextData.Waiting.Enqueue(participant);
+        }
+
+        public void CheckAllWaiting()
+        {
+            var section = Track.Sections.Last;
+            while (section != null)
+            {
+                SectionData data = GetSectionData(section.Value);
+                if (data.Waiting.Count > 0)
+                    CheckWaiting(section.Value, data);
+                section = section.Previous;
+            }
         }
 
         public void CheckWaiting(Section currentSection, SectionData data)

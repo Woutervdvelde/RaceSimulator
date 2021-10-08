@@ -25,7 +25,7 @@ namespace ControllerTest
             _participants.Add(new Driver("2", new Car(), TeamColors.Blue));
             _participants.Add(new Driver("3", new Car(), TeamColors.Blue));
 
-            _race = new Race(_track, _participants);
+            _race = new Race(_track, _participants, 1);
         }
 
         [Test]

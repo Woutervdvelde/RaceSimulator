@@ -15,6 +15,11 @@ namespace ControllerTest
         private Track _track;
         private List<IParticipant> _participants;
 
+        /**
+         * !IMPORTANT!
+         * These tests have been tested with a Section length of 100
+         */
+
         [SetUp]
         public void SetUp()
         {
@@ -26,7 +31,7 @@ namespace ControllerTest
             _participants.Add(new Driver("3", new Car(), TeamColors.Blue));
             _participants.Add(new Driver("4", new Car(), TeamColors.Blue));
 
-            _race = new Race(_track, _participants);
+            _race = new Race(_track, _participants, 1);
             _race.PositionParticipants(_race.Track, _race.Participants);
         }
 
@@ -78,7 +83,7 @@ namespace ControllerTest
             Track track = new Track("UnitTrack", new[] { SectionTypes.StartGrid, SectionTypes.RightCorner, SectionTypes.RightCorner, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.RightCorner, SectionTypes.RightCorner, SectionTypes.Finish });
             List<IParticipant> participants = new List<IParticipant>();
             participants.Add(new Driver("1", new Car(), TeamColors.Blue));
-            Race race = new Race(_track, _participants);
+            Race race = new Race(_track, _participants, 1);
 
             race.Participants[0].Equipment.Performance = 10;
             race.Participants[0].Equipment.Speed = 10;

@@ -42,7 +42,7 @@ namespace Controller
         {
             Track NextTrack = Competition.NextTrack();
             if (NextTrack != null)
-                CurrentRace = new Race(NextTrack, Competition.Participants, 2);
+                CurrentRace = new Race(NextTrack, Competition.Participants, 1);
         }
     }
 }
