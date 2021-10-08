@@ -53,6 +53,14 @@ namespace Controller
             _timer.Start();
         }
 
+        public void Stop()
+        {
+            RaceFinished?.Invoke(this, new EventArgs());
+            _timer = null;
+            DriversChanged = null;
+            RaceFinished = null;
+        }
+
         private void OnTimedEvent(Object source, ElapsedEventArgs args)
         {
             MoveParticipants();
@@ -134,11 +142,7 @@ namespace Controller
         public void CheckFinished()
         {
             if (_leaderboard.Count == Participants.Count)
-            {
-                _timer.Elapsed -= OnTimedEvent;
-                _timer.Stop();
-                RaceFinished.Invoke(this, new EventArgs());
-            }
+                Stop();
         }
 
         public void MoveParticipants()
@@ -199,6 +203,19 @@ namespace Controller
                 return;
 
             IParticipant p = data.Waiting.Dequeue();
+            MoveParticipantData(data, prevData, p);
+
+            if (data.Waiting.Count > 0 && (data.Left == null || data.Right == null))
+            {
+                IParticipant p2 = data.Waiting.Dequeue();
+                MoveParticipantData(data, prevData, p2);
+            }
+
+            _needsUpdate = true;
+        }
+
+        public void MoveParticipantData(SectionData data, SectionData prevData, IParticipant p)
+        {
             if (data.Left == null)
             {
                 data.Left = p;
@@ -206,7 +223,8 @@ namespace Controller
                 {
                     prevData.Left = null;
                     prevData.DistanceLeft = 0;
-                } else
+                }
+                else
                 {
                     prevData.Right = null;
                     prevData.DistanceRight = 0;
@@ -220,54 +238,17 @@ namespace Controller
                 {
                     prevData.Left = null;
                     prevData.DistanceLeft = 0;
-                } else
+                }
+                else
                 {
                     prevData.Right = null;
                     prevData.DistanceRight = 0;
                 }
                 p.IsLeft = false;
             }
-            if (prevSection.SectionType == SectionTypes.Finish)
+
+            if (prevData.Section.SectionType == SectionTypes.Finish)
                 AddParticipantLap(p);
-
-            if (data.Waiting.Count > 0 && (data.Left == null || data.Right == null))
-            {
-                IParticipant p2 = data.Waiting.Dequeue();
-                if (data.Left == null)
-                {
-                    data.Left = p2;
-                    if (p2.IsLeft)
-                    {
-                        prevData.Left = null;
-                        prevData.DistanceLeft = 0;
-                    }
-                    else
-                    {
-                        prevData.Right = null;
-                        prevData.DistanceRight = 0;
-                    }
-                    p2.IsLeft = true;
-                }
-                else if (data.Right == null)
-                {
-                    data.Right = p2;
-                    if (p2.IsLeft)
-                    {
-                        prevData.Left = null;
-                        prevData.DistanceLeft = 0;
-                    }
-                    else
-                    {
-                        prevData.Right = null;
-                        prevData.DistanceRight = 0;
-                    }
-                    p2.IsLeft = false;
-                }
-                if (prevSection.SectionType == SectionTypes.Finish)
-                    AddParticipantLap(p2);
-            }
-
-            _needsUpdate = true;
         }
     }
 }

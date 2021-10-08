@@ -31,7 +31,7 @@ namespace ControllerTest
             _participants.Add(new Driver("3", new Car(), TeamColors.Blue));
             _participants.Add(new Driver("4", new Car(), TeamColors.Blue));
 
-            _race = new Race(_track, _participants, 1);
+            _race = new Race(_track, _participants, 2);
             _race.PositionParticipants(_race.Track, _race.Participants);
         }
 
@@ -53,19 +53,7 @@ namespace ControllerTest
         }
 
         [Test]
-        public void MoveParticipants_AddToWaitingWhen100Added()
-        {
-            foreach (Driver d in _race.Participants)
-                d.Equipment.Performance = d.Equipment.Speed = 10;
-
-            _race.MoveParticipants();
-
-            SectionData data = _race.GetSectionData(_race.Track.Sections.ElementAt(2));
-            Assert.AreEqual(2, data.Waiting.Count);
-        }
-
-        [Test]
-        public void MoveParticipants_MoveToNextSectionWhenNonWaiting()
+        public void MoveParticipants_MoveToNextSectionWhenNonOccupied()
         {
             foreach (Driver d in _race.Participants)
                 d.Equipment.Performance = d.Equipment.Speed = 10;
@@ -78,23 +66,36 @@ namespace ControllerTest
         }
 
         [Test]
-        public void MoveParticipants_AddToWaitingOnStartWhenOnFinish()
+        public void MoveParticipants_AddToWaiting_WhenDistanceLongerThanSectionLength_AndNextOccupied()
         {
-            Track track = new Track("UnitTrack", new[] { SectionTypes.StartGrid, SectionTypes.RightCorner, SectionTypes.RightCorner, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.RightCorner, SectionTypes.RightCorner, SectionTypes.Finish });
-            List<IParticipant> participants = new List<IParticipant>();
-            participants.Add(new Driver("1", new Car(), TeamColors.Blue));
-            Race race = new Race(_track, _participants, 1);
+            _race.Participants[0].Equipment.Performance = _race.Participants[1].Equipment.Performance = 1;
+            _race.Participants[0].Equipment.Speed = _race.Participants[1].Equipment.Speed = 1;
+            _race.Participants[2].Equipment.Performance = _race.Participants[3].Equipment.Performance = 10;
+            _race.Participants[2].Equipment.Speed = _race.Participants[3].Equipment.Speed = 10;
 
-            race.Participants[0].Equipment.Performance = 10;
-            race.Participants[0].Equipment.Speed = 10;
+            _race.MoveParticipants();
 
-            SectionData finish = race.GetSectionData(race.Track.Sections.Last.Value);
-            finish.Left = race.Participants[0];
+            SectionData data = _race.GetSectionData(_race.Track.Sections.ElementAt(2));
+            Assert.AreEqual(2, data.Waiting.Count);
+        }
 
-            race.MoveParticipants();
+        [Test]
+        public void MoveParticipants_MoveToStartWhenOnFinish()
+        {
+            _race.Participants[0].Equipment.Performance = 10;
+            _race.Participants[0].Equipment.Speed = 10;
 
-            SectionData start = race.GetSectionData(race.Track.Sections.First.Value);
-            Assert.AreEqual(race.Participants[0], start.Waiting.Dequeue());
+            SectionData start = _race.GetSectionData(_race.Track.Sections.First.Value);
+            SectionData finish = _race.GetSectionData(_race.Track.Sections.Last.Value);
+
+            finish.Left = _race.Participants[0];
+            _race.MoveParticipants();
+
+            Assert.AreEqual(true, start.Left != null || start.Right != null);
+            if (start.Left != null)
+                Assert.AreEqual(_race.Participants[0], start.Left);
+            if (start.Right != null)
+                Assert.AreEqual(_race.Participants[0], start.Right);
         }
     }
 }

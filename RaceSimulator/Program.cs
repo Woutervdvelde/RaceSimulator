@@ -28,10 +28,7 @@ namespace RaceSimulator
 
         static void NextRace(object source, EventArgs args)
         {
-            Data.CurrentRace.RaceFinished -= NextRace;
-            Data.CurrentRace.DriversChanged -= Visual.OnDriversChanged;
             Data.NextRace();
-
             Visual.Initialize(Data.CurrentRace);
             Visual.DrawTrack(Data.CurrentRace.Track);
 
