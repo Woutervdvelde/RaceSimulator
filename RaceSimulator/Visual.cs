@@ -34,8 +34,10 @@ namespace RaceSimulator
 
         #region graphics
 
+
         private static int _width = 9;
         private static int _height = 4;
+        private static char _driverBroken = '¤';
         private static string[] _startHorizontal = { "═════════", "      1] ", " 2]      ", "═════════" };
         private static string[] _finishHorizontal = { "════░════", "  1 ░    ", "  2 ░    ", "════░════" };
         private static string[] _straightHorizontal = { "═════════", "    1    ", "    2    ", "═════════" };
@@ -85,12 +87,18 @@ namespace RaceSimulator
                 }
 
                 if (data.Left != null)
-                    graphic[i] = graphic[i].Replace('1', data.Left.Name[0]);
+                    if (data.Left.Equipment.IsBroken)
+                        graphic[i] = graphic[i].Replace('1', _driverBroken);
+                    else
+                        graphic[i] = graphic[i].Replace('1', data.Left.Name[0]);
                 else
                     graphic[i] = graphic[i].Replace('1', ' ');
 
                 if (data.Right != null)
-                    graphic[i] = graphic[i].Replace('2', data.Right.Name[0]);
+                    if (data.Right.Equipment.IsBroken)
+                        graphic[i] = graphic[i].Replace('2', _driverBroken);
+                    else
+                        graphic[i] = graphic[i].Replace('2', data.Right.Name[0]);
                 else
                     graphic[i] = graphic[i].Replace('2', ' ');
             }

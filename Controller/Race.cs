@@ -64,6 +64,7 @@ namespace Controller
         private void OnTimedEvent(Object source, ElapsedEventArgs args)
         {
             MoveParticipants();
+            RandomlyPunishParticipant();
         }
 
         public SectionData GetSectionData(Section section)
@@ -112,6 +113,24 @@ namespace Controller
             }
         }
 
+        public void RandomlyPunishParticipant()
+        {
+            foreach(IParticipant p in Participants)
+            {
+                if (p.Equipment.IsBroken)
+                    if (_random.Next(1, 8) == 1)
+                        p.Equipment.IsBroken = false;
+
+                if (!p.Equipment.IsBroken)
+                    if (_random.Next(1, 15) == 1)
+                    {
+                        p.Equipment.IsBroken = true;
+                        if (p.Equipment.Quality > 1)
+                            p.Equipment.Quality -= 1;
+                    }
+            }
+        }
+
         public void InitializeLaps()
         {
             _laps = new Dictionary<IParticipant, int>();
@@ -150,10 +169,10 @@ namespace Controller
             foreach (Section section in Track.Sections)
             {
                 SectionData data = GetSectionData(section);
-                if (data.Left != null)
+                if (data.Left != null && !data.Left.Equipment.IsBroken)
                     data.DistanceLeft += data.Left.Equipment.Performance * data.Left.Equipment.Speed;
 
-                if (data.Right != null)
+                if (data.Right != null && !data.Right.Equipment.IsBroken)
                     data.DistanceRight += data.Right.Equipment.Performance * data.Right.Equipment.Speed;
 
                 if (data.DistanceLeft >= Section.Length)
