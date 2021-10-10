@@ -11,9 +11,11 @@ namespace Model
         public int Speed { get; set; }
         public bool IsBroken { get; set; }
 
-        public Car()
-        {
-            Quality = 10;
-        }
+        public static int MIN_SPEED = 5;
+        public static int MIN_PERFORMANCE = 5;
+        public static int MIN_QUALITY = 5;        
+        public static int MAX_SPEED = 20;
+        public static int MAX_PERFORMANCE = 20;
+        public static int MAX_QUALITY = 20;
     }
 }

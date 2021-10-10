@@ -80,11 +80,15 @@ namespace Controller
 
         private void RandomizeEquipment()
         {
-            Participants.ForEach(_participant =>
+            Participants.ForEach(p =>
             {
-                _participant.Equipment.Quality = _random.Next(3, 10);
-                _participant.Equipment.Performance = _random.Next(3, 10);
-                _participant.Equipment.Speed = _random.Next(3, 10);
+                p.Equipment.Performance = _random.Next(Car.MIN_PERFORMANCE, Car.MAX_PERFORMANCE);
+                p.Equipment.Speed = _random.Next(Car.MIN_SPEED, Car.MAX_SPEED);
+
+                if (p.Equipment.Performance * p.Equipment.Speed > ((Car.MAX_SPEED * Car.MAX_PERFORMANCE) - (Car.MIN_SPEED * Car.MIN_PERFORMANCE)) / 2 )
+                    p.Equipment.Quality = _random.Next(Car.MIN_QUALITY, Car.MAX_PERFORMANCE / 2);
+                else
+                    p.Equipment.Quality = _random.Next(Car.MAX_PERFORMANCE / 2, Car.MAX_PERFORMANCE);
             });
         }
 
@@ -118,16 +122,16 @@ namespace Controller
             foreach(IParticipant p in Participants)
             {
                 if (p.Equipment.IsBroken)
-                    if (_random.Next(1, 8) == 1)
-                        p.Equipment.IsBroken = false;
-
-                if (!p.Equipment.IsBroken)
-                    if (_random.Next(1, 15) == 1)
+                {
+                    if (_random.Next(1, 30 / p.Equipment.Quality) == 1)
                     {
-                        p.Equipment.IsBroken = true;
-                        if (p.Equipment.Quality > 1)
-                            p.Equipment.Quality -= 1;
+                        p.Equipment.IsBroken = false;
+                        if (p.Equipment.Performance > Car.MIN_PERFORMANCE)
+                            p.Equipment.Performance -= 1;
                     }
+                } else
+                    if (_random.Next(1, p.Equipment.Quality) == 1)
+                        p.Equipment.IsBroken = true;
             }
         }
 
@@ -175,11 +179,26 @@ namespace Controller
                 if (data.Right != null && !data.Right.Equipment.IsBroken)
                     data.DistanceRight += data.Right.Equipment.Performance * data.Right.Equipment.Speed;
 
-                if (data.DistanceLeft >= Section.Length)
-                    MoveToNext(section, data.Left);
+                if (data.DistanceLeft >= Section.Length && data.DistanceRight >= Section.Length)
+                {
+                    if (data.DistanceLeft >= data.DistanceRight)
+                    {
+                        MoveToNext(section, data.Left);
+                        MoveToNext(section, data.Right);
+                    }
+                    else
+                    {
+                        MoveToNext(section, data.Right);
+                        MoveToNext(section, data.Left);
+                    }
+                } else
+                {
+                    if (data.DistanceLeft >= Section.Length)
+                        MoveToNext(section, data.Left);
 
-                if (data.DistanceRight >= Section.Length)
-                    MoveToNext(section, data.Right);
+                    if (data.DistanceRight >= Section.Length)
+                        MoveToNext(section, data.Right);
+                }
             }
 
             CheckAllWaiting();
