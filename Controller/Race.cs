@@ -26,10 +26,11 @@ namespace Controller
         public event EventHandler DriversChanged;
         public event EventHandler RaceFinished;
 
+        public LinkedList<IParticipant> Leaderboard;
+
         private Random _random;
         private Dictionary<Section, SectionData> _positions;
         private Dictionary<IParticipant, int> _laps;
-        private LinkedList<IParticipant> _leaderboard;
         private Timer _timer;
         private bool _needsUpdate;
 
@@ -41,7 +42,7 @@ namespace Controller
             _random = new Random(DateTime.Now.Millisecond);
             _positions = new Dictionary<Section, SectionData>();
             InitializeLaps();
-            _leaderboard = new LinkedList<IParticipant>();
+            Leaderboard = new LinkedList<IParticipant>();
             _timer = new Timer(500);
             _timer.Elapsed += OnTimedEvent;
             PositionParticipants(track, participants);
@@ -158,13 +159,13 @@ namespace Controller
             if (data.Right == p)
                 data.Right = null;
 
-            _leaderboard.AddLast(p);
+            Leaderboard.AddLast(p);
             CheckFinished();
         }
 
         public void CheckFinished()
         {
-            if (_leaderboard.Count == Participants.Count)
+            if (Leaderboard.Count == Participants.Count)
                 Stop();
         }
 

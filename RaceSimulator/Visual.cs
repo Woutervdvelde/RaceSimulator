@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 using System.Threading;
 using Controller;
 using Model;
@@ -38,6 +39,9 @@ namespace RaceSimulator
         private static int _width = 9;
         private static int _height = 4;
         private static char _driverBroken = '¤';
+        private static char _graphSide = '█';
+        private static char _graphTop = '▀';
+        private static char _graphBottom = '▄';
         private static string[] _startHorizontal = { "═════════", "      1] ", " 2]      ", "═════════" };
         private static string[] _finishHorizontal = { "════░════", "  1 ░    ", "  2 ░    ", "════░════" };
         private static string[] _straightHorizontal = { "═════════", "    1    ", "    2    ", "═════════" };
@@ -198,6 +202,52 @@ namespace RaceSimulator
                 _offsetX = _lastX * _width;
             if (_lastY * _height < _offsetY)
                 _offsetY = _lastY * _height;
+        }
+
+        private static int CalculateHighestTextWidth()
+        {
+            int highest = 0;
+            foreach (IParticipant p in _currentRace.Participants)
+                if (p.Name.Length > highest)
+                    highest = p.Name.Length;
+            return highest;
+        }
+
+        public static void ShowLeaderboard()
+        {
+            DrawTrack(_currentRace.Track);
+
+            int textWidth = CalculateHighestTextWidth() + 2;
+            int totalWidth = textWidth + 6;
+            int left = Console.WindowWidth / 2 - (textWidth + 6) / 2;
+            int top = Console.WindowHeight / 2 - _currentRace.Participants.Count;
+
+            Console.SetCursorPosition(left, top - 1);
+            for (int s = 0; s < totalWidth; s++) Console.Write(_graphBottom);
+
+            for (int i = 0; i < _currentRace.Leaderboard.Count; i++)
+            {
+                string name = _currentRace.Leaderboard.ElementAt(i).Name;
+                int widthOffset = (textWidth - name.Length) / 2;
+                bool widthOffsetExtra = (textWidth - name.Length) % 2 != 0;
+                Console.SetCursorPosition(left, top + i);
+
+                Console.Write($"{_graphSide} {i + 1} {_graphSide}");
+                for (int s = 0; s < widthOffset; s++) Console.Write(' ');
+
+                string nameOutput = widthOffsetExtra ? $" {name}" : name;
+                Console.Write(nameOutput);
+
+                for (int s = 0; s < widthOffset; s++) Console.Write(' ');
+                Console.Write(_graphSide);
+            }
+
+            Console.SetCursorPosition(left, top + _currentRace.Leaderboard.Count);
+            for (int s = 0; s < totalWidth; s++) Console.Write(_graphTop);
+
+            string nextInfo = "Press Enter to proceed...";
+            Console.SetCursorPosition(left + totalWidth - nextInfo.Length, top + _currentRace.Leaderboard.Count + 1);
+            Console.Write(nextInfo);
         }
     }
 }

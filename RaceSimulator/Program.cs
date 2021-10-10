@@ -28,12 +28,16 @@ namespace RaceSimulator
 
         static void NextRace(object source, EventArgs args)
         {
-            Data.NextRace();
-            Visual.Initialize(Data.CurrentRace);
-            Visual.DrawTrack(Data.CurrentRace.Track);
+            Visual.ShowLeaderboard();
+            if (Console.ReadKey(true).Key == ConsoleKey.Enter)
+            {
+                Data.NextRace();
+                Visual.Initialize(Data.CurrentRace);
+                Visual.DrawTrack(Data.CurrentRace.Track);
 
-            Data.CurrentRace.RaceFinished += NextRace;
-            Data.CurrentRace.Start();
+                Data.CurrentRace.RaceFinished += NextRace;
+                Data.CurrentRace.Start();
+            }
         }
     }
 }
