@@ -32,6 +32,9 @@ namespace RaceSimulator
             if (Console.ReadKey(true).Key == ConsoleKey.Enter)
             {
                 Data.NextRace();
+                if (Data.Competition.Done)
+                    return;
+
                 Visual.Initialize(Data.CurrentRace);
                 Visual.DrawTrack(Data.CurrentRace.Track);
 

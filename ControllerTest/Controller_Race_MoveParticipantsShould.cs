@@ -97,5 +97,23 @@ namespace ControllerTest
             if (start.Right != null)
                 Assert.AreEqual(_race.Participants[0], start.Right);
         }
+
+        [Test]
+        public void MoveParticipants_MoveFastestFirst()
+        {
+            _race.Participants[0].Equipment.Performance = _race.Participants[1].Equipment.Performance = 1;
+            _race.Participants[0].Equipment.Speed = _race.Participants[1].Equipment.Speed = 1;
+            _race.Participants[2].Equipment.Performance = 11;
+            _race.Participants[2].Equipment.Speed = 11;
+            _race.Participants[3].Equipment.Performance = 12;
+            _race.Participants[3].Equipment.Speed = 12;
+
+            SectionData s = _race.GetSectionData(_race.Track.Sections.ElementAt(2));
+
+            _race.MoveParticipants();
+
+            Assert.AreEqual(_race.Participants[3], s.Waiting.Dequeue());
+            Assert.AreEqual(_race.Participants[2], s.Waiting.Dequeue());
+        }
     }
 }
