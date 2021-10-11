@@ -10,6 +10,7 @@ namespace Model
         public int Points { get; set; }
         public IEquipment Equipment { get; set; }
         public TeamColors TeamColor { get; set; }
+        public bool IsLeft { get; set; }
 
         public Driver(string name, IEquipment car, TeamColors teamColor)
         {

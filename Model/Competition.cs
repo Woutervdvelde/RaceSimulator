@@ -8,6 +8,7 @@ namespace Model
     {
         public List<IParticipant> Participants { get; set; }
         public Queue<Track> Tracks { get; set; }
+        public bool Done { get; set; }
 
         public Competition()
         {
@@ -18,6 +19,7 @@ namespace Model
         {
             if (Tracks.TryDequeue(out Track track))
                 return track;
+            Done = true;
             return null;
         }
     }

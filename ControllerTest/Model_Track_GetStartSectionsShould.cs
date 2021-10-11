@@ -9,12 +9,12 @@ namespace ControllerTest
     [TestFixture]
     class Model_Track_GetStartSectionsShould
     {
-        private Track Track;
+        private Track _track;
 
         [SetUp]
         public void SetUp()
         {
-            Track = new Track("UnitTrack", new SectionTypes[] { SectionTypes.StartGrid, SectionTypes.StartGrid, SectionTypes.StartGrid, SectionTypes.Straight, SectionTypes.Finish });
+            _track = new Track("UnitTrack", new SectionTypes[] { SectionTypes.StartGrid, SectionTypes.StartGrid, SectionTypes.StartGrid, SectionTypes.Straight, SectionTypes.Finish });
         }
 
         [Test]
@@ -28,7 +28,7 @@ namespace ControllerTest
         [Test]
         public void GetStartSections_ThreeStartGrids_ReturnThree()
         {
-            LinkedList<Section> startSections = Track.GetStartSections();
+            LinkedList<Section> startSections = _track.GetStartSections();
             Assert.AreEqual(3, startSections.Count);
             foreach (Section section in startSections)
             {

@@ -15,9 +15,31 @@ namespace RaceSimulator
             Visual.Initialize(Data.CurrentRace);
             Visual.DrawTrack(Data.CurrentRace.Track);
 
+            Data.CurrentRace.RaceFinished += NextRace;
+            Data.CurrentRace.Start();
+
             for (; ; )
             {
                 Thread.Sleep(100);
+                //if (Console.ReadKey(true).Key == ConsoleKey.Enter)
+                //    Data.CurrentRace.MoveParticipants();
+            }
+        }
+
+        static void NextRace(object source, EventArgs args)
+        {
+            Visual.ShowLeaderboard();
+            if (Console.ReadKey(true).Key == ConsoleKey.Enter)
+            {
+                Data.NextRace();
+                if (Data.Competition.Done)
+                    return;
+
+                Visual.Initialize(Data.CurrentRace);
+                Visual.DrawTrack(Data.CurrentRace.Track);
+
+                Data.CurrentRace.RaceFinished += NextRace;
+                Data.CurrentRace.Start();
             }
         }
     }

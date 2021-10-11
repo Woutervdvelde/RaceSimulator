@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 using System.Threading;
 using Controller;
 using Model;
@@ -29,28 +30,33 @@ namespace RaceSimulator
             _lastY = 0;
             _offsetX = 0;
             _offsetY = 0;
+            Data.CurrentRace.DriversChanged += OnDriversChanged;
         }
 
         #region graphics
 
-        public static string CarDefault = "█";
 
         private static int _width = 9;
         private static int _height = 4;
-        private static string[] _startHorizontal = { "═════════", "      L] ", " R]      ", "═════════" };
-        private static string[] _finishHorizontal = { "════░════", "  L ░    ", "  R ░    ", "════░════" };
-        private static string[] _straightHorizontal = { "═════════", "    L    ", "    R    ", "═════════" };
-        private static string[] _straightVertical = { "║       ║", "║       ║", "║ L   R ║", "║       ║" };
+        private static char _driverBroken = '¤';
+        private static char _graphSide = '█';
+        private static char _graphTop = '▀';
+        private static char _graphBottom = '▄';
+        private static string[] _startHorizontal = { "═════════", "      1] ", " 2]      ", "═════════" };
+        private static string[] _finishHorizontal = { "════░════", "  1 ░    ", "  2 ░    ", "════░════" };
+        private static string[] _straightHorizontal = { "═════════", "    1    ", "    2    ", "═════════" };
+        private static string[] _straightVertical = { "║       ║", "║       ║", "║ 1   2 ║", "║       ║" };
 
-        private static string[] _cornerNorthWest = { "╝       ║", "  L  R  ║", "        ║", "════════╝" };
-        private static string[] _cornerNorthEast = { "║       ╚", "║  L  R  ", "║        ", "╚════════" };
-        private static string[] _cornerSouthWest = { "════════╗", "        ║", " L   R  ║", "╗       ║" };
-        private static string[] _cornerSouthEast = { "╔════════", "║        ", "║  L  R  ", "║       ╔" };
+        private static string[] _cornerNorthWest = { "╝       ║", "  1  2  ║", "        ║", "════════╝" };
+        private static string[] _cornerNorthEast = { "║       ╚", "║  1  2  ", "║        ", "╚════════" };
+        private static string[] _cornerSouthWest = { "════════╗", "        ║", " 1   2  ║", "╗       ║" };
+        private static string[] _cornerSouthEast = { "╔════════", "║        ", "║  1  2  ", "║       ╔" };
 
         #endregion
 
         public static void DrawTrack(Track track)
         {
+            Console.Clear();
             if (!track.HasGeneratedSections)
                 GenerateCoordinatesAndGraphics(track);
 
@@ -67,7 +73,6 @@ namespace RaceSimulator
             {
                 Console.SetCursorPosition(section.X * _width + _offsetX, section.Y * _height + _offsetY + i);
                 Console.Write(graphic[i]);
-                Thread.Sleep(25);
             }
         }
 
@@ -79,24 +84,37 @@ namespace RaceSimulator
 
             for (int i = 0; i < section.Graphic.Length; i++)
             {
-                if (!section.Graphic[i].Contains("L") && !section.Graphic[i].Contains("R"))
+                if (!section.Graphic[i].Contains("1") && !section.Graphic[i].Contains("2"))
                 {
                     graphic[i] = section.Graphic[i];
                     continue;
                 }
 
                 if (data.Left != null)
-                    graphic[i] = graphic[i].Replace('L', data.Left.Name[0]);
+                    if (data.Left.Equipment.IsBroken)
+                        graphic[i] = graphic[i].Replace('1', _driverBroken);
+                    else
+                        graphic[i] = graphic[i].Replace('1', data.Left.Name[0]);
                 else
-                    graphic[i] = graphic[i].Replace('L', ' ');
+                    graphic[i] = graphic[i].Replace('1', ' ');
 
                 if (data.Right != null)
-                    graphic[i] = graphic[i].Replace('R', data.Right.Name[0]);
+                    if (data.Right.Equipment.IsBroken)
+                        graphic[i] = graphic[i].Replace('2', _driverBroken);
+                    else
+                        graphic[i] = graphic[i].Replace('2', data.Right.Name[0]);
                 else
-                    graphic[i] = graphic[i].Replace('R', ' ');
+                    graphic[i] = graphic[i].Replace('2', ' ');
             }
 
             return graphic;
+        }
+
+        public static void OnDriversChanged(object source, EventArgs args)
+        {
+            DriversChangedEventArgs driverArgs = args as DriversChangedEventArgs;
+            if (driverArgs != null)
+                DrawTrack(driverArgs.Track);
         }
 
         private static void GenerateCoordinatesAndGraphics(Track track)
@@ -184,6 +202,52 @@ namespace RaceSimulator
                 _offsetX = _lastX * _width;
             if (_lastY * _height < _offsetY)
                 _offsetY = _lastY * _height;
+        }
+
+        private static int CalculateHighestTextWidth()
+        {
+            int highest = 0;
+            foreach (IParticipant p in _currentRace.Participants)
+                if (p.Name.Length > highest)
+                    highest = p.Name.Length;
+            return highest;
+        }
+
+        public static void ShowLeaderboard()
+        {
+            DrawTrack(_currentRace.Track);
+
+            int textWidth = CalculateHighestTextWidth() + 2;
+            int totalWidth = textWidth + 6;
+            int left = Console.WindowWidth / 2 - (textWidth + 6) / 2;
+            int top = Console.WindowHeight / 2 - _currentRace.Participants.Count;
+
+            Console.SetCursorPosition(left, top - 1);
+            for (int s = 0; s < totalWidth; s++) Console.Write(_graphBottom);
+
+            for (int i = 0; i < _currentRace.Leaderboard.Count; i++)
+            {
+                string name = _currentRace.Leaderboard.ElementAt(i).Name;
+                int widthOffset = (textWidth - name.Length) / 2;
+                bool widthOffsetExtra = (textWidth - name.Length) % 2 != 0;
+                Console.SetCursorPosition(left, top + i);
+
+                Console.Write($"{_graphSide} {i + 1} {_graphSide}");
+                for (int s = 0; s < widthOffset; s++) Console.Write(' ');
+
+                string nameOutput = widthOffsetExtra ? $" {name}" : name;
+                Console.Write(nameOutput);
+
+                for (int s = 0; s < widthOffset; s++) Console.Write(' ');
+                Console.Write(_graphSide);
+            }
+
+            Console.SetCursorPosition(left, top + _currentRace.Leaderboard.Count);
+            for (int s = 0; s < totalWidth; s++) Console.Write(_graphTop);
+
+            string nextInfo = "Press Enter to proceed...";
+            Console.SetCursorPosition(left + totalWidth - nextInfo.Length, top + _currentRace.Leaderboard.Count + 1);
+            Console.Write(nextInfo);
         }
     }
 }

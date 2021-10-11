@@ -42,5 +42,31 @@ namespace Model
             }
             return sectionList;
         }
+
+        public Section GetNextSection(Section section)
+        {
+            bool foundCurrent = false;
+            foreach(Section s in Sections)
+            {
+                if (foundCurrent)
+                    return s;
+
+                foundCurrent = s.Equals(section);
+            }
+            return Sections.First.Value;
+        }
+
+        public Section GetPreviousSection(Section section)
+        {
+            Section prevSection = Sections.Last.Value;
+            foreach (Section s in Sections)
+            {
+                if (s.Equals(section))
+                    return prevSection;
+
+                prevSection = s;
+            }
+            return Sections.Last.Value;
+        }
     }
 }
