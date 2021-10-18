@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ControllerTest", "Controlle
 		{C7314D6A-ABAF-43F8-B8E3-0E83AB5334F4} = {C7314D6A-ABAF-43F8-B8E3-0E83AB5334F4}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaceSimulatorGUI", "RaceSimulatorGUI\RaceSimulatorGUI.csproj", "{BF83501E-A415-40D3-AB3F-CA9001460983}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RaceSimulatorGUI", "RaceSimulatorGUI\RaceSimulatorGUI.csproj", "{BF83501E-A415-40D3-AB3F-CA9001460983}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

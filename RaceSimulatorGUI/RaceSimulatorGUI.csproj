@@ -6,4 +6,22 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Resources\Corner_NE.png" />
+    <None Remove="Resources\Corner_NW.png" />
+    <None Remove="Resources\Corner_SE.png" />
+    <None Remove="Resources\Corner_SW.png" />
+    <None Remove="Resources\Straight_Horizontal.png" />
+    <None Remove="Resources\Straight_Vertical.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\Corner_NE.png" />
+    <Content Include="Resources\Corner_NW.png" />
+    <Content Include="Resources\Corner_SE.png" />
+    <Content Include="Resources\Corner_SW.png" />
+    <Content Include="Resources\Straight_Horizontal.png" />
+    <Content Include="Resources\Straight_Vertical.png" />
+  </ItemGroup>
+
 </Project>
