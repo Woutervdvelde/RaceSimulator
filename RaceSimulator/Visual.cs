@@ -24,6 +24,7 @@ namespace RaceSimulator
 
         public static void Initialize(Race currentRace)
         {
+            Console.Clear();
             _currentRace = currentRace;
             _direction = Directions.East;
             _lastX = 0;
@@ -56,7 +57,6 @@ namespace RaceSimulator
 
         public static void DrawTrack(Track track)
         {
-            Console.Clear();
             if (!track.HasGeneratedSections)
                 GenerateCoordinatesAndGraphics(track);
 

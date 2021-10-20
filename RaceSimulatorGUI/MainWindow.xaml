@@ -6,8 +6,7 @@
         xmlns:local="clr-namespace:RaceSimulatorGUI"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid Background="#FF181818">
-        <Image Margin="350,167,350,167"/>
-
+    <Grid Background="#AFCE65">
+        <Image x:Name="Track" HorizontalAlignment="Left" Height="450" Margin="0,0,0,0" VerticalAlignment="Top" Width="800"/>
     </Grid>
 </Window>
