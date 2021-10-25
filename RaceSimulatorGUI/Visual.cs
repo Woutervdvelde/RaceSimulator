@@ -67,8 +67,9 @@ namespace RaceSimulatorGUI
                 Bitmap b = ResourceManager.GetImage(section.Image);
                 graphics.DrawImage(b, section.X * _width, section.Y * _height);
             }
+            _baseTrack = baseTrack;
 
-            return _baseTrack;
+            return baseTrack;
         }
 
         public static Bitmap DrawParticipants(Bitmap baseTrack)

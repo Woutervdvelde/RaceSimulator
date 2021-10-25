@@ -24,6 +24,7 @@ namespace RaceSimulatorGUI
                 return img;
 
             Bitmap image = new Bitmap(input);
+            //Bitmap image = new Bitmap("C:\\Users\\woute\\Documents\\Projects\\RaceSimulator\\RaceSimulatorGUI\\Resources\\Corner_NE.png");
             _resources.Add(input, image);
             return image;
         }
