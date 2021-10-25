@@ -8,11 +8,6 @@ using Model;
 
 namespace RaceSimulator
 {
-    public enum Directions
-    {
-        North, East, South, West
-    }
-
     public static class Visual
     {
         private static Race _currentRace;
