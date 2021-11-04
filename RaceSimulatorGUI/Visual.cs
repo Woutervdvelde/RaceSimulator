@@ -18,6 +18,9 @@ namespace RaceSimulatorGUI
         private static int _maxX;
         private static int _minY;
         private static int _maxY;
+        private static int _offsetX;
+        private static int _offsetY;
+
         private static Bitmap _baseTrack;
 
         #region Graphics
@@ -35,14 +38,18 @@ namespace RaceSimulatorGUI
 
         public static void Initialize(Race race)
         {
+            ResourceManager.Initialize();
             _currentRace = race;
             _direction = Directions.East;
             _lastX = 0;
             _lastY = 0;
-            _minX = 0;
+            _minX = _width;
             _maxX = 0;
-            _minY = 0;
+            _minY = _height;
             _maxY = 0;
+            _offsetX = 0;
+            _offsetY = 0;
+            _baseTrack = null;
         }
 
         public static BitmapSource DrawTrack(Track track)
@@ -59,13 +66,13 @@ namespace RaceSimulatorGUI
         {
             if (_baseTrack != null) return _baseTrack;
 
-            Bitmap baseTrack = ResourceManager.GetEmptyImage((_maxX - _minX), (_maxY - _minY));
+            Bitmap baseTrack = ResourceManager.GetEmptyImage((_maxX - _minX) + _width, (_maxY - _minY) + _height);
             Graphics graphics = Graphics.FromImage(baseTrack);
 
             foreach (Section section in track.Sections)
             {
                 Bitmap b = ResourceManager.GetImage(section.Image);
-                graphics.DrawImage(b, section.X * _width, section.Y * _height);
+                graphics.DrawImage(b, section.X * _width + _offsetX, section.Y * _height + _offsetY);
             }
             _baseTrack = baseTrack;
 
@@ -74,7 +81,38 @@ namespace RaceSimulatorGUI
 
         public static Bitmap DrawParticipants(Bitmap baseTrack)
         {
-            return baseTrack;
+            Bitmap map = new Bitmap(baseTrack);
+            Graphics graphics = Graphics.FromImage(map);
+
+            foreach (Section section in _currentRace.Track.Sections)
+            {
+                SectionData data = _currentRace.GetSectionData(section);
+                
+                if (data.Left != null)
+                    if (!data.Left.Equipment.IsBroken)
+                    {
+                        Bitmap b = ResourceManager.GetDriverImage(SectionSides.Left, data.Left.TeamColor, section);
+                        graphics.DrawImage(b, section.X * _width + _offsetX, section.Y * _height + _offsetY);
+                    } else
+                    {
+                        Bitmap b = ResourceManager.GetDriverImage(SectionSides.Left, TeamColors.Broken, section);
+                        graphics.DrawImage(b, section.X * _width + _offsetX, section.Y * _height + _offsetY);
+                    }
+
+                if (data.Right != null)
+                    if (!data.Right.Equipment.IsBroken)
+                    {
+                        Bitmap b = ResourceManager.GetDriverImage(SectionSides.Right, data.Right.TeamColor, section);
+                        graphics.DrawImage(b, section.X * _width + _offsetX, section.Y * _height + _offsetY);
+                    }
+                    else
+                    {
+                        Bitmap b = ResourceManager.GetDriverImage(SectionSides.Right, TeamColors.Broken, section);
+                        graphics.DrawImage(b, section.X * _width + _offsetX, section.Y * _height + _offsetY);
+                    }
+            }
+
+            return map;
         }
 
         private static void GenerateCoordinatesAndGraphics(Track track)
@@ -87,11 +125,12 @@ namespace RaceSimulatorGUI
                 GenerateCoordinates(section);
             }
             track.HasGeneratedSections = true;
+            _offsetX = Math.Abs(_minX);
+            _offsetY = Math.Abs(_minY);
         }
 
         private static void GenerateGraphics(Section section)
         {
-            section.Direction = _direction;
             switch (section.SectionType)
             {
                 case SectionTypes.StartGrid:
@@ -108,13 +147,25 @@ namespace RaceSimulatorGUI
                     break;
                 case SectionTypes.LeftCorner:
                     if (_direction == Directions.North)
+                    {
                         section.Image = _corner_SW;
+                        section.SectionDirection = SectionDirections.SW;
+                    }
                     if (_direction == Directions.East)
+                    {
                         section.Image = _corner_NW;
+                        section.SectionDirection = SectionDirections.NW;
+                    }
                     if (_direction == Directions.South)
+                    {
                         section.Image = _corner_NE;
+                        section.SectionDirection = SectionDirections.NE;
+                    }
                     if (_direction == Directions.West)
+                    {
                         section.Image = _corner_SE;
+                        section.SectionDirection = SectionDirections.SE;
+                    }
 
                     if (_direction - 1 < 0)
                         _direction = Directions.West;
@@ -123,13 +174,25 @@ namespace RaceSimulatorGUI
                     break;
                 case SectionTypes.RightCorner:
                     if (_direction == Directions.North)
+                    {
                         section.Image = _corner_SE;
+                        section.SectionDirection = SectionDirections.SE;
+                    }
                     if (_direction == Directions.East)
+                    {
                         section.Image = _corner_SW;
+                        section.SectionDirection = SectionDirections.SW;
+                    }
                     if (_direction == Directions.South)
+                    {
                         section.Image = _corner_NW;
+                        section.SectionDirection = SectionDirections.NW;
+                    }
                     if (_direction == Directions.West)
+                    {
                         section.Image = _corner_NE;
+                        section.SectionDirection = SectionDirections.NE;
+                    }
 
                     if ((int)_direction + 1 > 3)
                         _direction = Directions.North;
@@ -137,6 +200,7 @@ namespace RaceSimulatorGUI
                         _direction++;
                     break;
             }
+            section.Direction = _direction;
         }
 
         private static void GenerateCoordinates(Section section)

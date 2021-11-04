@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Model
 {
-    public enum TeamColors
+    public enum SectionSides
     {
-        Red, Green, Yellow, Blue, Broken
+        Left, Right
     }
 }

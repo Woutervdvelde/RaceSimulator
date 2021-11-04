@@ -29,14 +29,12 @@ namespace RaceSimulatorGUI
             Data.Initialize();
             Data.NextRace();
 
-            ResourceManager.Initialize();
             Visual.Initialize(Data.CurrentRace);
-            Visual.DrawTrack(Data.CurrentRace.Track);
+            DrawTrack(Data.CurrentRace.Track);
 
             Data.CurrentRace.RaceFinished += NextRace;
-            Data.CurrentRace.Start();
-
             Data.CurrentRace.DriversChanged += OnDriversChanged;
+            Data.CurrentRace.Start();
         }
 
         void NextRace(object source, EventArgs args)
@@ -46,18 +44,24 @@ namespace RaceSimulatorGUI
                 return;
 
             Visual.Initialize(Data.CurrentRace);
-            Visual.DrawTrack(Data.CurrentRace.Track);
-
+            DrawTrack(Data.CurrentRace.Track);
             Data.CurrentRace.RaceFinished += NextRace;
+            Data.CurrentRace.DriversChanged += OnDriversChanged;
             Data.CurrentRace.Start();
+
         }
 
         void OnDriversChanged(object source, EventArgs args)
         {
             DriversChangedEventArgs driverArgs = args as DriversChangedEventArgs;
+            DrawTrack(driverArgs.Track);
+        }
+
+        void DrawTrack(Track track)
+        {
             this.Track.Dispatcher.BeginInvoke(DispatcherPriority.Render, new Action(() => {
                 this.Track.Source = null;
-                this.Track.Source = Visual.DrawTrack(driverArgs.Track);
+                this.Track.Source = Visual.DrawTrack(track);
             }));
         }
     }

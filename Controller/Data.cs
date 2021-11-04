@@ -21,8 +21,8 @@ namespace Controller
         {
             Competition.Participants.Add(new Driver("Ragdoll", new Car(), TeamColors.Blue));
             Competition.Participants.Add(new Driver("Maine Coon", new Car(), TeamColors.Green));
-            Competition.Participants.Add(new Driver("British Shorthair", new Car(), TeamColors.Green));
-            Competition.Participants.Add(new Driver("Norwegian Forest Cat", new Car(), TeamColors.Green));
+            Competition.Participants.Add(new Driver("British Shorthair", new Car(), TeamColors.Red));
+            Competition.Participants.Add(new Driver("Norwegian Forest Cat", new Car(), TeamColors.Yellow));
         }
 
         public static void AddTracks()

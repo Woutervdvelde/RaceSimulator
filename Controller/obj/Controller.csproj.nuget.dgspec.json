@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\woute\\Documents\\Projects\\RaceSimulator\\Controller\\Controller.csproj": {}
+    "F:\\git repository\\Windesheim HBO\\RaceSimulator\\Controller\\Controller.csproj": {}
   },
   "projects": {
-    "C:\\Users\\woute\\Documents\\Projects\\RaceSimulator\\Controller\\Controller.csproj": {
+    "F:\\git repository\\Windesheim HBO\\RaceSimulator\\Controller\\Controller.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\woute\\Documents\\Projects\\RaceSimulator\\Controller\\Controller.csproj",
+        "projectUniqueName": "F:\\git repository\\Windesheim HBO\\RaceSimulator\\Controller\\Controller.csproj",
         "projectName": "Controller",
-        "projectPath": "C:\\Users\\woute\\Documents\\Projects\\RaceSimulator\\Controller\\Controller.csproj",
-        "packagesPath": "C:\\Users\\woute\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\woute\\Documents\\Projects\\RaceSimulator\\Controller\\obj\\",
+        "projectPath": "F:\\git repository\\Windesheim HBO\\RaceSimulator\\Controller\\Controller.csproj",
+        "packagesPath": "C:\\Users\\Wouter\\.nuget\\packages\\",
+        "outputPath": "F:\\git repository\\Windesheim HBO\\RaceSimulator\\Controller\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\woute\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Wouter\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,8 +28,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\woute\\Documents\\Projects\\RaceSimulator\\Model\\Model.csproj": {
-                "projectPath": "C:\\Users\\woute\\Documents\\Projects\\RaceSimulator\\Model\\Model.csproj"
+              "F:\\git repository\\Windesheim HBO\\RaceSimulator\\Model\\Model.csproj": {
+                "projectPath": "F:\\git repository\\Windesheim HBO\\RaceSimulator\\Model\\Model.csproj"
               }
             }
           }
@@ -53,26 +53,40 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.10, 3.1.10]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\woute\\Documents\\Projects\\RaceSimulator\\Model\\Model.csproj": {
+    "F:\\git repository\\Windesheim HBO\\RaceSimulator\\Model\\Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\woute\\Documents\\Projects\\RaceSimulator\\Model\\Model.csproj",
+        "projectUniqueName": "F:\\git repository\\Windesheim HBO\\RaceSimulator\\Model\\Model.csproj",
         "projectName": "Model",
-        "projectPath": "C:\\Users\\woute\\Documents\\Projects\\RaceSimulator\\Model\\Model.csproj",
-        "packagesPath": "C:\\Users\\woute\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\woute\\Documents\\Projects\\RaceSimulator\\Model\\obj\\",
+        "projectPath": "F:\\git repository\\Windesheim HBO\\RaceSimulator\\Model\\Model.csproj",
+        "packagesPath": "C:\\Users\\Wouter\\.nuget\\packages\\",
+        "outputPath": "F:\\git repository\\Windesheim HBO\\RaceSimulator\\Model\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\woute\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Wouter\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -107,12 +121,26 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.10, 3.1.10]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -10,6 +10,7 @@ namespace Model
         public int X { get; set; }
         public int Y { get; set; }
         public Directions Direction { get; set; }
+        public SectionDirections SectionDirection { get; set; }
         public string[] Graphic { get; set; }
         public string Image { get; set; }
 
