@@ -26,3 +26,4 @@ C:\Users\woute\Documents\Projects\RaceSimulator\Model\obj\Debug\netcoreapp3.1\Mo
 C:\Users\woute\Documents\Projects\RaceSimulator\Model\obj\Debug\netcoreapp3.1\Model.csproj.CoreCompileInputs.cache
 C:\Users\woute\Documents\Projects\RaceSimulator\Model\obj\Debug\netcoreapp3.1\Model.dll
 C:\Users\woute\Documents\Projects\RaceSimulator\Model\obj\Debug\netcoreapp3.1\Model.pdb
+F:\git repository\Windesheim HBO\RaceSimulator\Model\obj\Debug\netcoreapp3.1\Model.GeneratedMSBuildEditorConfig.editorconfig

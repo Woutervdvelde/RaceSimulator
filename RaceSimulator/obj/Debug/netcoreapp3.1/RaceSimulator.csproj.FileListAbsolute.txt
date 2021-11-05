@@ -53,3 +53,4 @@ C:\Users\woute\Documents\Projects\RaceSimulator\RaceSimulator\obj\Debug\netcorea
 C:\Users\woute\Documents\Projects\RaceSimulator\RaceSimulator\obj\Debug\netcoreapp3.1\RaceSimulator.dll
 C:\Users\woute\Documents\Projects\RaceSimulator\RaceSimulator\obj\Debug\netcoreapp3.1\RaceSimulator.pdb
 C:\Users\woute\Documents\Projects\RaceSimulator\RaceSimulator\obj\Debug\netcoreapp3.1\RaceSimulator.genruntimeconfig.cache
+F:\git repository\Windesheim HBO\RaceSimulator\RaceSimulator\obj\Debug\netcoreapp3.1\RaceSimulator.GeneratedMSBuildEditorConfig.editorconfig

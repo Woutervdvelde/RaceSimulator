@@ -35,3 +35,4 @@ C:\Users\woute\Documents\Projects\RaceSimulator\Controller\obj\Debug\netcoreapp3
 C:\Users\woute\Documents\Projects\RaceSimulator\Controller\obj\Debug\netcoreapp3.1\Controller.csproj.CopyComplete
 C:\Users\woute\Documents\Projects\RaceSimulator\Controller\obj\Debug\netcoreapp3.1\Controller.dll
 C:\Users\woute\Documents\Projects\RaceSimulator\Controller\obj\Debug\netcoreapp3.1\Controller.pdb
+F:\git repository\Windesheim HBO\RaceSimulator\Controller\obj\Debug\netcoreapp3.1\Controller.GeneratedMSBuildEditorConfig.editorconfig

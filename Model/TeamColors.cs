@@ -6,6 +6,6 @@ namespace Model
 {
     public enum TeamColors
     {
-        Red, Green, Yellow, Grey, Blue
+        Red, Green, Yellow, Blue, Broken
     }
 }

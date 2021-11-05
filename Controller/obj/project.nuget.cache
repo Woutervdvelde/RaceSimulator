@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "8EYF2zAihmjkDTMO9QvKKmyfPZiEzqXuR9SuZT+fW0gt2NFpYetg1K0aI9nLlTIdamoPUWmZAM4usr5JkEYOXA==",
+  "dgSpecHash": "co+KIEI1fgL/sE8IaDbWb9T0mj4zMvEkww6P+8g1EUuv5TuC6+oFE7gZB7ZZedxsSScouvA3qVcsFf/6G4qeCg==",
   "success": true,
   "projectFilePath": "F:\\git repository\\Windesheim HBO\\RaceSimulator\\Controller\\Controller.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Wouter\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
+    "C:\\Users\\Wouter\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\Wouter\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512"
+  ],
   "logs": []
 }
