@@ -34,6 +34,9 @@
               "F:\\git repository\\Windesheim HBO\\RaceSimulator\\Model\\Model.csproj": {
                 "projectPath": "F:\\git repository\\Windesheim HBO\\RaceSimulator\\Model\\Model.csproj"
               },
+              "F:\\git repository\\Windesheim HBO\\RaceSimulator\\RaceSimulatorGUI\\RaceSimulatorGUI.csproj": {
+                "projectPath": "F:\\git repository\\Windesheim HBO\\RaceSimulator\\RaceSimulatorGUI\\RaceSimulatorGUI.csproj"
+              },
               "F:\\git repository\\Windesheim HBO\\RaceSimulator\\RaceSimulator\\RaceSimulator.csproj": {
                 "projectPath": "F:\\git repository\\Windesheim HBO\\RaceSimulator\\RaceSimulator\\RaceSimulator.csproj"
               }
@@ -94,6 +97,9 @@
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WPF": {
+              "privateAssets": "none"
             }
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
@@ -234,6 +240,94 @@
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "F:\\git repository\\Windesheim HBO\\RaceSimulator\\RaceSimulatorGUI\\RaceSimulatorGUI.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "F:\\git repository\\Windesheim HBO\\RaceSimulator\\RaceSimulatorGUI\\RaceSimulatorGUI.csproj",
+        "projectName": "RaceSimulatorGUI",
+        "projectPath": "F:\\git repository\\Windesheim HBO\\RaceSimulator\\RaceSimulatorGUI\\RaceSimulatorGUI.csproj",
+        "packagesPath": "C:\\Users\\Wouter\\.nuget\\packages\\",
+        "outputPath": "F:\\git repository\\Windesheim HBO\\RaceSimulator\\RaceSimulatorGUI\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Wouter\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "F:\\git repository\\Windesheim HBO\\RaceSimulator\\Controller\\Controller.csproj": {
+                "projectPath": "F:\\git repository\\Windesheim HBO\\RaceSimulator\\Controller\\Controller.csproj"
+              },
+              "F:\\git repository\\Windesheim HBO\\RaceSimulator\\Model\\Model.csproj": {
+                "projectPath": "F:\\git repository\\Windesheim HBO\\RaceSimulator\\Model\\Model.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[5.0.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.10, 3.1.10]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x86",
+              "version": "[3.1.19, 3.1.19]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WPF": {
+              "privateAssets": "none"
             }
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
