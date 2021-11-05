@@ -30,7 +30,9 @@ namespace RaceSimulatorGUI
         {
             Data.Initialize();
             Data.NextRace();
+
             InitializeComponent();
+
             Visual.Initialize(Data.CurrentRace);
             DrawTrack(Data.CurrentRace.Track);
 

@@ -6,14 +6,17 @@ using Controller;
 
 namespace RaceSimulatorGUI
 {
-    class MainWindowDataContext : INotifyPropertyChanged
+    public class MainWindowDataContext : INotifyPropertyChanged
     {
-        public string TrackName { get => Data.CurrentRace.Track.Name; }
+        public string TrackName { 
+            get {
+                return $"Track: {Data.CurrentRace.Track.Name}";
+            }}
 
         public MainWindowDataContext()
         {
-            if (Data.CurrentRace != null)
-                Data.CurrentRace.DriversChanged += OnDriversChanged;
+            Data.CurrentRace.DriversChanged += OnDriversChanged;
+            OnDriversChanged(this, new EventArgs());
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
