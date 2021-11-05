@@ -6,25 +6,21 @@
         xmlns:local="clr-namespace:RaceSimulatorGUI"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <local:MainWindowDataContext/>
+    </Window.DataContext>
     <Grid Background="#FFCE65">
         <DockPanel>
             <Menu DockPanel.Dock="Top" Height="20" VerticalAlignment="Top">
                 <MenuItem Header="Menu">
-                    <MenuItem Header="Open race stats" Click="MenuItem_MenuItem_Race_Click">
-                        <MenuItem.CommandTarget>
-                            <local:RaceStatistics/>
-                        </MenuItem.CommandTarget>
-                    </MenuItem>
-                    <MenuItem Header="Open competition stats" Click="MenuItem_MenuItem_Competition_Click">
-                        <MenuItem.CommandTarget>
-                            <local:CompetitionStatistics/>
-                        </MenuItem.CommandTarget>
-                    </MenuItem>
+                    <MenuItem Header="Open race stats" Click="MenuItem_MenuItem_Race_Click"/>
+                    <MenuItem Header="Open competition stats" Click="MenuItem_MenuItem_Competition_Click"/>
                     <MenuItem Header="Exit" Click="MenuItem_Exit_Click"/>
                 </MenuItem>
 
             </Menu>
         </DockPanel>
-        <Image x:Name="Track" HorizontalAlignment="Left" Height="430" Margin="0,20,0,0" VerticalAlignment="Top" Width="800"/>
+        <Label Content="Label" Width="800" Height="30" Margin="0,20,0,380" DataContext="{Binding TrackName, Mode=OneWay}"/>
+        <Image x:Name="Track" HorizontalAlignment="Left" Height="370" Margin="0,70,0,0" VerticalAlignment="Bottom" Width="800"/>
     </Grid>
 </Window>

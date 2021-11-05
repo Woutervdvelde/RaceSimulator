@@ -23,12 +23,14 @@ namespace RaceSimulatorGUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        private CompetitionStatistics _competitionStatistics;
+        private RaceStatistics _raceStatistics;
+
         public MainWindow()
         {
-            InitializeComponent();
             Data.Initialize();
             Data.NextRace();
-
+            InitializeComponent();
             Visual.Initialize(Data.CurrentRace);
             DrawTrack(Data.CurrentRace.Track);
 
@@ -67,14 +69,14 @@ namespace RaceSimulatorGUI
 
         private void MenuItem_MenuItem_Race_Click(object sender, RoutedEventArgs args)
         {
-            RaceStatistics stats = new RaceStatistics();
-            stats.Show();
+            _raceStatistics = new RaceStatistics();
+            _raceStatistics.Show();
         }
 
         private void MenuItem_MenuItem_Competition_Click(object sender, RoutedEventArgs args)
         {
-            CompetitionStatistics stats = new CompetitionStatistics();
-            stats.Show();
+            _competitionStatistics = new CompetitionStatistics();
+            _competitionStatistics.Show();
         }
 
         private void MenuItem_Exit_Click(object sender, RoutedEventArgs args)
