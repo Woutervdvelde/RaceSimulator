@@ -64,5 +64,22 @@ namespace RaceSimulatorGUI
                 this.Track.Source = Visual.DrawTrack(track);
             }));
         }
+
+        private void MenuItem_MenuItem_Race_Click(object sender, RoutedEventArgs args)
+        {
+            RaceStatistics stats = new RaceStatistics();
+            stats.Show();
+        }
+
+        private void MenuItem_MenuItem_Competition_Click(object sender, RoutedEventArgs args)
+        {
+            CompetitionStatistics stats = new CompetitionStatistics();
+            stats.Show();
+        }
+
+        private void MenuItem_Exit_Click(object sender, RoutedEventArgs args)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }

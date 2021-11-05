@@ -7,6 +7,24 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid Background="#FFCE65">
-        <Image x:Name="Track" HorizontalAlignment="Left" Height="450" Margin="0,0,0,0" VerticalAlignment="Top" Width="800"/>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top" Height="20" VerticalAlignment="Top">
+                <MenuItem Header="Menu">
+                    <MenuItem Header="Open race stats" Click="MenuItem_MenuItem_Race_Click">
+                        <MenuItem.CommandTarget>
+                            <local:RaceStatistics/>
+                        </MenuItem.CommandTarget>
+                    </MenuItem>
+                    <MenuItem Header="Open competition stats" Click="MenuItem_MenuItem_Competition_Click">
+                        <MenuItem.CommandTarget>
+                            <local:CompetitionStatistics/>
+                        </MenuItem.CommandTarget>
+                    </MenuItem>
+                    <MenuItem Header="Exit" Click="MenuItem_Exit_Click"/>
+                </MenuItem>
+
+            </Menu>
+        </DockPanel>
+        <Image x:Name="Track" HorizontalAlignment="Left" Height="430" Margin="0,20,0,0" VerticalAlignment="Top" Width="800"/>
     </Grid>
 </Window>
