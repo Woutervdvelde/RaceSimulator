@@ -19,7 +19,7 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <Label Content="{Binding TrackName, Mode=OneWay}" Width="800" Margin="0,22,0,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" FontWeight="ExtraBold" FontSize="14"/>
-        <Image x:Name="Track" HorizontalAlignment="Left" Height="370" Margin="0,70,0,0" VerticalAlignment="Bottom" Width="800"/>
+        <Label Content="{Binding TrackName, Mode=OneWay}" Width="800" Margin="0,30,0,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" FontWeight="ExtraBold" FontSize="14"/>
+        <Image x:Name="Track" HorizontalAlignment="Left" Height="370" Margin="0,60,0,0" VerticalAlignment="Top" Width="800"/>
     </Grid>
 </Window>

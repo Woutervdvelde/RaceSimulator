@@ -25,18 +25,20 @@ namespace RaceSimulatorGUI
     {
         private CompetitionStatistics _competitionStatistics;
         private RaceStatistics _raceStatistics;
+        private MainWindowDataContext _dataContext;
 
         public MainWindow()
         {
             Data.Initialize();
             Data.NextRace();
 
+            _dataContext = new MainWindowDataContext();
             InitializeComponent();
 
             Visual.Initialize(Data.CurrentRace);
             DrawTrack(Data.CurrentRace.Track);
 
-            Data.CurrentRace.RaceFinished += NextRace;
+            Race.RaceFinished += NextRace;
             Data.CurrentRace.DriversChanged += OnDriversChanged;
             Data.CurrentRace.Start();
         }
@@ -49,10 +51,8 @@ namespace RaceSimulatorGUI
 
             Visual.Initialize(Data.CurrentRace);
             DrawTrack(Data.CurrentRace.Track);
-            Data.CurrentRace.RaceFinished += NextRace;
             Data.CurrentRace.DriversChanged += OnDriversChanged;
             Data.CurrentRace.Start();
-
         }
 
         void OnDriversChanged(object source, EventArgs args)

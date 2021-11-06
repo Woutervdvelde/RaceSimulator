@@ -24,7 +24,8 @@ namespace Controller
 
         public DateTime StartTime { get; set; }
         public event EventHandler DriversChanged;
-        public event EventHandler RaceFinished;
+        public static event EventHandler RaceFinished;
+        public static event EventHandler RaceStarted;
 
         public LinkedList<IParticipant> Leaderboard;
 
@@ -39,14 +40,17 @@ namespace Controller
             Track = track;
             Participants = participants;
             Laps = laps;
+            Leaderboard = new LinkedList<IParticipant>();
+
             _random = new Random(DateTime.Now.Millisecond);
             _positions = new Dictionary<Section, SectionData>();
-            InitializeLaps();
-            Leaderboard = new LinkedList<IParticipant>();
             _timer = new Timer(500);
             _timer.Elapsed += OnTimedEvent;
+
+            InitializeLaps();
             PositionParticipants(track, participants);
             RandomizeEquipment();
+            RaceStarted?.Invoke(this, new EventArgs());
         }
 
         public void Start()
@@ -59,7 +63,7 @@ namespace Controller
             RaceFinished?.Invoke(this, new EventArgs());
             _timer = null;
             DriversChanged = null;
-            RaceFinished = null;
+            //RaceFinished = null;
         }
 
         private void OnTimedEvent(Object source, ElapsedEventArgs args)
