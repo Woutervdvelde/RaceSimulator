@@ -6,7 +6,26 @@
         xmlns:local="clr-namespace:RaceSimulatorGUI"
         mc:Ignorable="d"
         Title="RaceStatistics" Height="450" Width="800">
-    <Grid>
-        
+    <Window.DataContext>
+        <local:RaceDataContext/>
+    </Window.DataContext>
+    <Grid Background="#FFCE65" HorizontalAlignment="Stretch">
+        <Label Content="Race" HorizontalAlignment="Center" FontSize="24" FontWeight="Bold"/>
+        <ListView Margin="25,50,425,0" ItemsSource="{Binding RaceDriverPositions}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Position" Width="50" DisplayMemberBinding="{Binding Position}"/>
+                    <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Lap time" Width="100" DisplayMemberBinding="{Binding LapTime}"/>
+                    <GridViewColumn Header="Car" Width="50">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Image}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>

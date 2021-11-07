@@ -33,7 +33,9 @@ namespace RaceSimulatorGUI
         public void RankParticipants(List<IParticipant> participants)
         {
             participants.Sort(SortByPoints);
-            CompetitionRankings = participants.Select((p, i) => new CompetitionRanking((Driver)p, i + 1)).ToList();
+            CompetitionRankings = participants
+                .Select((p, i) => new CompetitionRanking((Driver)p, i + 1))
+                .ToList();
         }
 
         public int SortByPoints(IParticipant a, IParticipant b)
