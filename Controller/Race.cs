@@ -68,8 +68,15 @@ namespace Controller
 
         private void OnTimedEvent(Object source, ElapsedEventArgs args)
         {
-            MoveParticipants();
             RandomlyPunishParticipant();
+            MoveParticipants();
+
+            if (_needsUpdate)
+            {
+                DriversChangedEventArgs e = new DriversChangedEventArgs(Track);
+                DriversChanged?.Invoke(this, e);
+                _needsUpdate = false;
+            }
         }
 
         public SectionData GetSectionData(Section section)
@@ -207,13 +214,6 @@ namespace Controller
             }
 
             CheckAllWaiting();
-
-            if (_needsUpdate)
-            {
-                DriversChangedEventArgs args = new DriversChangedEventArgs(Track);
-                DriversChanged?.Invoke(this, args);
-                _needsUpdate = false;
-            }
         }
 
         public void MoveToNext(Section currentSection, IParticipant participant)

@@ -25,14 +25,12 @@ namespace RaceSimulatorGUI
     {
         private CompetitionStatistics _competitionStatistics;
         private RaceStatistics _raceStatistics;
-        private MainWindowDataContext _dataContext;
 
         public MainWindow()
         {
             Data.Initialize();
             Data.NextRace();
 
-            _dataContext = new MainWindowDataContext();
             InitializeComponent();
 
             Visual.Initialize(Data.CurrentRace);

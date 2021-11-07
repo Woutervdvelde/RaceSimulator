@@ -60,6 +60,7 @@
     <None Remove="Resources\Corner_NW.png" />
     <None Remove="Resources\Corner_SE.png" />
     <None Remove="Resources\Corner_SW.png" />
+    <None Remove="Resources\Finish_Horizontal.png" />
     <None Remove="Resources\Green_Corner_NE_East_Left.png" />
     <None Remove="Resources\Green_Corner_NE_East_Right.png" />
     <None Remove="Resources\Green_Corner_NE_North_Left.png" />
@@ -108,6 +109,7 @@
     <None Remove="Resources\Red_Vertical_Straight_North_Right.png" />
     <None Remove="Resources\Red_Vertical_Straight_South_Left.png" />
     <None Remove="Resources\Red_Vertical_Straight_South_Right.png" />
+    <None Remove="Resources\Start_Horizontal.png" />
     <None Remove="Resources\Straight_Horizontal.png" />
     <None Remove="Resources\Straight_Vertical.png" />
     <None Remove="Resources\Yellow_Corner_NE_East_Left.png" />
@@ -296,6 +298,9 @@
     <Content Include="Resources\Corner_SW.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Finish_Horizontal.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Green_Corner_NE_East_Left.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -439,6 +444,9 @@
     </Content>
     <Content Include="Resources\Red_Vertical_Straight_South_Right.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Start_Horizontal.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Straight_Horizontal.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
