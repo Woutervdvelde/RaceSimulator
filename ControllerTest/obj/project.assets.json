@@ -1341,6 +1341,9 @@
       "Model/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "System.Drawing.Common": "5.0.2"
+        },
         "compile": {
           "bin/placeholder/Model.dll": {}
         },

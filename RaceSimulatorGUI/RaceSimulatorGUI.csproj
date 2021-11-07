@@ -56,6 +56,11 @@
     <None Remove="Resources\Broken_Vertical_Straight_North_Right.png" />
     <None Remove="Resources\Broken_Vertical_Straight_South_Left.png" />
     <None Remove="Resources\Broken_Vertical_Straight_South_Right.png" />
+    <None Remove="Resources\Cars\Car_Blue.png" />
+    <None Remove="Resources\Cars\Car_Broken.png" />
+    <None Remove="Resources\Cars\Car_Green.png" />
+    <None Remove="Resources\Cars\Car_Red.png" />
+    <None Remove="Resources\Cars\Car_Yellow.png" />
     <None Remove="Resources\Corner_NE.png" />
     <None Remove="Resources\Corner_NW.png" />
     <None Remove="Resources\Corner_SE.png" />
@@ -285,6 +290,21 @@
     </Content>
     <Content Include="Resources\Broken_Vertical_Straight_South_Right.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Cars\Car_Blue.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Cars\Car_Broken.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Cars\Car_Green.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Cars\Car_Red.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Cars\Car_Yellow.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Corner_NE.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

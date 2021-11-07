@@ -6,6 +6,7 @@ namespace Model
 {
     public class Competition
     {
+        public static event EventHandler CompetitionFinished;
         public List<IParticipant> Participants { get; set; }
         public Queue<Track> Tracks { get; set; }
         public bool Done { get; set; }
@@ -20,6 +21,8 @@ namespace Model
             if (Tracks.TryDequeue(out Track track))
                 return track;
             Done = true;
+            CompetitionFinished?.Invoke(this, new EventArgs());
+            CompetitionFinished = null;
             return null;
         }
     }

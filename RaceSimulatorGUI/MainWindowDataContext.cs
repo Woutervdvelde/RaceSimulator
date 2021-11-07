@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 using Controller;
+using Model;
 
 namespace RaceSimulatorGUI
 {
     public class MainWindowDataContext : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public string TrackName { 
             get {
                 return Data.CurrentRace.Track.Name;
@@ -16,10 +19,8 @@ namespace RaceSimulatorGUI
         public MainWindowDataContext()
         {
             Race.RaceStarted += OnRaceStarted;
-            Data.CurrentRace.DriversChanged += OnDriversChanged;
+            Race.DriversChanged += OnDriversChanged;
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public void OnDriversChanged(object sender, EventArgs args)
         {
@@ -28,7 +29,6 @@ namespace RaceSimulatorGUI
 
         public void OnRaceStarted(object sender, EventArgs args)
         {
-            Data.CurrentRace.DriversChanged += OnDriversChanged;
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TrackName"));
         }
     }

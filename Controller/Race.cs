@@ -23,7 +23,7 @@ namespace Controller
         public int Laps { get; set; }
 
         public DateTime StartTime { get; set; }
-        public event EventHandler DriversChanged;
+        public static event EventHandler DriversChanged;
         public static event EventHandler RaceFinished;
         public static event EventHandler RaceStarted;
 
@@ -46,6 +46,7 @@ namespace Controller
             _positions = new Dictionary<Section, SectionData>();
             _timer = new Timer(500);
             _timer.Elapsed += OnTimedEvent;
+            Competition.CompetitionFinished += OnCompetitionFinished;
 
             InitializeLaps();
             PositionParticipants(track, participants);
@@ -62,8 +63,14 @@ namespace Controller
         {
             RaceFinished?.Invoke(this, new EventArgs());
             _timer = null;
+            Competition.CompetitionFinished -= OnCompetitionFinished;
+        }
+
+        public void OnCompetitionFinished(object sender, EventArgs args)
+        {
+            RaceStarted = null;
+            RaceFinished = null;
             DriversChanged = null;
-            //RaceFinished = null;
         }
 
         private void OnTimedEvent(Object source, ElapsedEventArgs args)
@@ -137,13 +144,17 @@ namespace Controller
                 {
                     if (_random.Next(1, 30 / p.Equipment.Quality) == 1)
                     {
+                        _needsUpdate = true;
                         p.Equipment.IsBroken = false;
                         if (p.Equipment.Performance > Car.MIN_PERFORMANCE)
                             p.Equipment.Performance -= 1;
                     }
                 } else
                     if (_random.Next(1, p.Equipment.Quality) == 1)
+                    {
+                        _needsUpdate = true;
                         p.Equipment.IsBroken = true;
+                    }
             }
         }
 
@@ -171,6 +182,7 @@ namespace Controller
                 data.Right = null;
 
             Leaderboard.AddLast(p);
+            p.Points += (4 - Leaderboard.Count < 1 ? 1 : 4 - Leaderboard.Count);
             CheckFinished();
         }
 

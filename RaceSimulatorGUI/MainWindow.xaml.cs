@@ -37,7 +37,7 @@ namespace RaceSimulatorGUI
             DrawTrack(Data.CurrentRace.Track);
 
             Race.RaceFinished += NextRace;
-            Data.CurrentRace.DriversChanged += OnDriversChanged;
+            Race.DriversChanged += OnDriversChanged;
             Data.CurrentRace.Start();
         }
 
@@ -49,7 +49,6 @@ namespace RaceSimulatorGUI
 
             Visual.Initialize(Data.CurrentRace);
             DrawTrack(Data.CurrentRace.Track);
-            Data.CurrentRace.DriversChanged += OnDriversChanged;
             Data.CurrentRace.Start();
         }
 
