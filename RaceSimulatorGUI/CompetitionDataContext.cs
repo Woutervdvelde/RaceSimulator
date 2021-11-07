@@ -14,6 +14,15 @@ namespace RaceSimulatorGUI
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public List<CompetitionRanking> CompetitionRankings { get; set; }
+        public string CurrentRaceName { get => Data.CurrentRace.Track.Name; }
+        public string NextRaceName { 
+            get {
+                Data.Competition.Tracks.TryPeek(out Track t);
+                if (t != null)
+                    return t.Name;
+                return ""; 
+            }
+        }
 
         public CompetitionDataContext()
         {
@@ -38,7 +47,7 @@ namespace RaceSimulatorGUI
         public void OnRaceFinished(object sender, EventArgs args)
         {
             RankParticipants(Data.Competition.Participants);
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CompetitionRankings"));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(""));
         }
     }
 

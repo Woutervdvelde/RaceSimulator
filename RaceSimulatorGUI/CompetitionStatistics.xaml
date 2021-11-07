@@ -10,7 +10,22 @@
         <local:CompetitionDataContext/>
     </Window.DataContext>
     <Grid Background="#FFCE65">
-        <ListView x:Name="CompetitionRankings" ItemsSource="{Binding CompetitionRankings}" Background="Transparent">
+        <Label Content="Competition" HorizontalAlignment="Center" FontSize="24" FontWeight="Bold"/>
+        <Grid Height="50" VerticalAlignment="Top" Margin="0,40,0,0" HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0" Content="Current race: "/>
+            <Label Grid.Column="1" Content="{Binding CurrentRaceName}" FontWeight="Bold"/>
+            <Label Grid.Row="1" Grid.Column="0" Content="Next race: "/>
+            <Label Grid.Row="1" Grid.Column="1" Content="{Binding NextRaceName}" FontWeight="Bold"/>
+        </Grid>
+        <ListView x:Name="CompetitionRankings" ItemsSource="{Binding CompetitionRankings}" Background="Transparent" Margin="90,100,90,0" HorizontalAlignment="Center">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Rank" Width="50" DisplayMemberBinding="{Binding Rank}"/>
