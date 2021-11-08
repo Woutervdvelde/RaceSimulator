@@ -13,6 +13,7 @@ namespace RaceSimulatorGUI
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public List<RaceDriverPosition> RaceDriverPositions { get; set; }
+        public List<LapTimeSpan> LapTimeSpans { get; set; }
 
         public RaceDataContext()
         {
@@ -39,7 +40,7 @@ namespace RaceSimulatorGUI
                         participants.AddFirst(data.Right);
                         participants.AddFirst(data.Left);
                     }
-                } 
+                }
                 else if (data.Left != null)
                 {
                     participants.AddFirst(data.Left);
@@ -50,17 +51,20 @@ namespace RaceSimulatorGUI
                 }
             }
 
-            //var results = Data.CurrentRace.Participants
-            //    .OrderByDescending(p => Data.CurrentRace.GetDistanceFromParticipant(p))
-            //    .Select((p, i) => new RaceDriverPosition((Driver)p, i))
-            //    .ToList();
-            //RaceDriverPositions = results;
-
-            var results = participants
+            RaceDriverPositions = participants
                 .Select((p, i) => new RaceDriverPosition((Driver)p, i + 1))
+                .OrderByDescending(p => p.Laps)
                 .ToList();
-            RaceDriverPositions = results;
+        }
 
+        public void GenerateLapTimes()
+        {
+            List<LapTimeSpan> list = new List<LapTimeSpan>();
+            foreach (KeyValuePair<IParticipant, LinkedList<TimeSpan>> entry in Data.CurrentRace.LapTimes)
+                foreach (TimeSpan time in entry.Value)
+                    list.Add(new LapTimeSpan((Driver)entry.Key, time));
+            list.OrderBy(l => l.LapTime);
+            LapTimeSpans = list;
         }
 
         public void OnDriversChanged(object sender, EventArgs args)
@@ -74,9 +78,9 @@ namespace RaceSimulatorGUI
     {
         public Driver Participant { get; set; }
         public int Position { get; set; }
-        public string Name { get => Participant.Name; }
-        public TimeSpan LapTime { 
-            get 
+        public int Laps { get => Data.CurrentRace.ParticipantLaps[Participant]; }
+        public TimeSpan LapTime {
+            get
             {
                 if (Data.CurrentRace.LapTimes.TryGetValue(Participant, out LinkedList<TimeSpan> times))
                     return times.Last.Value;
@@ -90,6 +94,19 @@ namespace RaceSimulatorGUI
         {
             Participant = participant;
             Position = position;
+        }
+    }
+
+    public class LapTimeSpan {
+        public Driver Participant { get; set; }
+        public TimeSpan LapTime { get; set; }
+        public BitmapSource Image { get => ResourceManager.CreateBitmapSourceFromGdiBitmap(ResourceManager.GetImage($".\\Resources\\{Participant.Image}")); }
+
+
+        public LapTimeSpan(Driver participant, TimeSpan timeSpan)
+        {
+            Participant = participant;
+            LapTime = timeSpan;
         }
     }
 }
