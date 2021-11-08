@@ -18,6 +18,7 @@ namespace Controller
          *  - Track must start with all the StartGrids (min of 3)
          *  - The last Section should always be the Finish
          */
+        // TODO: make delegate for DriversChanged
         public Track Track { get; set; }
         public List<IParticipant> Participants { get; set; }
         public int Laps { get; set; }
