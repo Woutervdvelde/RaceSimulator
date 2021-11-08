@@ -21,6 +21,7 @@ namespace Controller
         public Track Track { get; set; }
         public List<IParticipant> Participants { get; set; }
         public int Laps { get; set; }
+        public Dictionary<IParticipant, int> ParticipantLaps;
         public Dictionary<IParticipant, LinkedList<TimeSpan>> LapTimes;
 
         public static event EventHandler DriversChanged;
@@ -31,8 +32,6 @@ namespace Controller
 
         private Random _random;
         private Dictionary<Section, SectionData> _positions;
-        private Dictionary<IParticipant, int> _laps;
-        private Dictionary<IParticipant, long> _distances;
         private Timer _timer;
         private DateTime _startTime;
         private bool _needsUpdate;
@@ -47,7 +46,6 @@ namespace Controller
 
             _random = new Random(DateTime.Now.Millisecond);
             _positions = new Dictionary<Section, SectionData>();
-            _distances = new Dictionary<IParticipant, long>();
             _timer = new Timer(500);
             _timer.Elapsed += OnTimedEvent;
 
@@ -166,16 +164,16 @@ namespace Controller
 
         public void InitializeLaps()
         {
-            _laps = new Dictionary<IParticipant, int>();
+            ParticipantLaps = new Dictionary<IParticipant, int>();
 
             foreach (IParticipant p in Participants)
-                _laps.Add(p, 0);
+                ParticipantLaps.Add(p, 0);
         }
 
         public void AddParticipantLap(IParticipant p)
         {
-            _laps[p] += 1;
-            if (_laps[p] >= Laps)
+            ParticipantLaps[p] += 1;
+            if (ParticipantLaps[p] >= Laps)
                 ParticipantFinished(p);
 
             TimeSpan elapsed = DateTime.Now - _startTime;
@@ -190,22 +188,6 @@ namespace Controller
                 list.AddLast(elapsed);
                 LapTimes.Add(p, list);
             }
-        }
-
-        public void AddDistanceToParticipant(IParticipant p, int distance)
-        {
-            if (_distances.TryGetValue(p, out long value))
-                value += distance;
-            else
-                _distances.Add(p, distance);
-        }
-
-        public long GetDistanceFromParticipant(IParticipant p)
-        {
-            if (_distances.TryGetValue(p, out long value))
-                return value;
-            else
-                return 0;
         }
 
         public void ParticipantFinished(IParticipant p)
@@ -237,14 +219,12 @@ namespace Controller
                 {
                     distance = data.Left.Equipment.Performance * data.Left.Equipment.Speed;
                     data.DistanceLeft += distance;
-                    AddDistanceToParticipant(data.Left, distance);
                 }
 
                 if (data.Right != null && !data.Right.Equipment.IsBroken)
                 {
                     distance = data.Right.Equipment.Performance * data.Right.Equipment.Speed;
                     data.DistanceRight += distance;
-                    AddDistanceToParticipant(data.Right, distance);
                 }
 
                 if (data.DistanceLeft >= Section.Length && data.DistanceRight >= Section.Length)
