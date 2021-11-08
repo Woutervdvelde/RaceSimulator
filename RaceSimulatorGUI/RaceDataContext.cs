@@ -19,6 +19,7 @@ namespace RaceSimulatorGUI
         {
             Race.DriversChanged += OnDriversChanged;
             GenerateDriverPositions();
+            GenerateLapTimes();
         }
 
         public void GenerateDriverPositions()
@@ -63,13 +64,14 @@ namespace RaceSimulatorGUI
             foreach (KeyValuePair<IParticipant, LinkedList<TimeSpan>> entry in Data.CurrentRace.LapTimes)
                 foreach (TimeSpan time in entry.Value)
                     list.Add(new LapTimeSpan((Driver)entry.Key, time));
-            list.OrderBy(l => l.LapTime);
-            LapTimeSpans = list;
+
+            LapTimeSpans = list.OrderBy(l => l.LapTime).ToList();
         }
 
         public void OnDriversChanged(object sender, EventArgs args)
         {
             GenerateDriverPositions();
+            GenerateLapTimes();
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(""));
         }
     }
@@ -77,6 +79,8 @@ namespace RaceSimulatorGUI
     public class RaceDriverPosition
     {
         public Driver Participant { get; set; }
+
+        //TODO: position doesn't show correctly
         public int Position { get; set; }
         public int Laps { get => Data.CurrentRace.ParticipantLaps[Participant]; }
         public TimeSpan LapTime {
