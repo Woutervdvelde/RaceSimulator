@@ -25,7 +25,7 @@ namespace Controller
         public Dictionary<IParticipant, int> ParticipantLaps;
         public Dictionary<IParticipant, LinkedList<TimeSpan>> LapTimes;
 
-        public static event EventHandler DriversChanged;
+        public event EventHandler DriversChanged;
         public static event EventHandler RaceFinished;
         public static event EventHandler RaceStarted;
 
@@ -66,6 +66,7 @@ namespace Controller
 
         public void Stop()
         {
+            DriversChanged = null;
             _timer.Stop();
             _timer = null;
             RaceFinished?.Invoke(this, new EventArgs());

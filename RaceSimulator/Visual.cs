@@ -26,6 +26,7 @@ namespace RaceSimulator
             _lastY = 0;
             _offsetX = 0;
             _offsetY = 0;
+            currentRace.DriversChanged += OnDriversChanged;
         }
 
         #region graphics
@@ -210,7 +211,6 @@ namespace RaceSimulator
         public static void ShowLeaderboard()
         {
             DrawTrack(_currentRace.Track);
-
             int textWidth = CalculateHighestTextWidth() + 2;
             int totalWidth = textWidth + 6;
             int left = Console.WindowWidth / 2 - (textWidth + 6) / 2;

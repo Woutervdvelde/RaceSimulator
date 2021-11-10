@@ -33,32 +33,34 @@ namespace RaceSimulatorGUI
 
             InitializeComponent();
 
-            Visual.Initialize(Data.CurrentRace);
-            DrawTrack(Data.CurrentRace.Track);
-
             Race.RaceFinished += NextRace;
-            Race.DriversChanged += OnDriversChanged;
-            Data.CurrentRace.Start();
+            Start();
         }
 
-        void NextRace(object source, EventArgs args)
+        private void NextRace(object source, EventArgs args)
         {
             Data.NextRace();
             if (Data.Competition.Done)
                 return;
 
+            Start();
+        }
+
+        private void Start()
+        {
             Visual.Initialize(Data.CurrentRace);
             DrawTrack(Data.CurrentRace.Track);
+            Data.CurrentRace.DriversChanged += OnDriversChanged;
             Data.CurrentRace.Start();
         }
 
-        void OnDriversChanged(object source, EventArgs args)
+        private void OnDriversChanged(object source, EventArgs args)
         {
             DriversChangedEventArgs driverArgs = args as DriversChangedEventArgs;
             DrawTrack(driverArgs.Track);
         }
 
-        void DrawTrack(Track track)
+        private void DrawTrack(Track track)
         {
             this.Track.Dispatcher.BeginInvoke(DispatcherPriority.Render, new Action(() => {
                 this.Track.Source = null;

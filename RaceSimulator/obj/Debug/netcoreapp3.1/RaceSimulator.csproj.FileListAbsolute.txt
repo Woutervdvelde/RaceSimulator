@@ -59,3 +59,8 @@ F:\git repository\Windesheim HBO\RaceSimulator\RaceSimulator\bin\Debug\netcoreap
 F:\git repository\Windesheim HBO\RaceSimulator\RaceSimulator\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
 F:\git repository\Windesheim HBO\RaceSimulator\RaceSimulator\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
 F:\git repository\Windesheim HBO\RaceSimulator\RaceSimulator\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\woute\Documents\Projects\RaceSimulator\RaceSimulator\bin\Debug\netcoreapp3.1\Microsoft.Win32.SystemEvents.dll
+C:\Users\woute\Documents\Projects\RaceSimulator\RaceSimulator\bin\Debug\netcoreapp3.1\System.Drawing.Common.dll
+C:\Users\woute\Documents\Projects\RaceSimulator\RaceSimulator\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\woute\Documents\Projects\RaceSimulator\RaceSimulator\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\woute\Documents\Projects\RaceSimulator\RaceSimulator\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll

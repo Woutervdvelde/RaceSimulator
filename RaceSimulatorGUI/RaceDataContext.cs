@@ -23,9 +23,22 @@ namespace RaceSimulatorGUI
 
         public RaceDataContext()
         {
-            Race.DriversChanged += OnDriversChanged;
+            Data.CurrentRace.DriversChanged += OnDriversChanged;
+            Race.RaceStarted += OnRaceStarted;
             GenerateDriverPositions();
             GenerateLapTimes();
+        }
+
+        private void OnRaceStarted(object source, EventArgs args)
+        {
+            Data.CurrentRace.DriversChanged += OnDriversChanged;
+        }
+
+        public void OnDriversChanged(object sender, EventArgs args)
+        {
+            GenerateDriverPositions();
+            GenerateLapTimes();
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(""));
         }
 
         public void GenerateDriverPositions()
@@ -75,13 +88,6 @@ namespace RaceSimulatorGUI
                     list.Add(new LapTimeSpan((Driver)entry.Key, time));
 
             LapTimeSpans = list.OrderBy(l => l.LapTime).ToList();
-        }
-
-        public void OnDriversChanged(object sender, EventArgs args)
-        {
-            GenerateDriverPositions();
-            GenerateLapTimes();
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(""));
         }
     }
 

@@ -14,7 +14,6 @@ namespace RaceSimulator
 
             Visual.Initialize(Data.CurrentRace);
             Visual.DrawTrack(Data.CurrentRace.Track);
-            Race.DriversChanged += Visual.OnDriversChanged;
 
             Race.RaceFinished += NextRace;
             Data.CurrentRace.Start();
