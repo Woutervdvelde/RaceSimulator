@@ -66,8 +66,9 @@ namespace Controller
 
         public void Stop()
         {
-            RaceFinished?.Invoke(this, new EventArgs());
+            _timer.Stop();
             _timer = null;
+            RaceFinished?.Invoke(this, new EventArgs());
             Competition.CompetitionFinished -= OnCompetitionFinished;
         }
 
@@ -206,7 +207,7 @@ namespace Controller
 
         public void CheckFinished()
         {
-            if (Leaderboard.Count == Participants.Count)
+            if (Leaderboard.Count >= Participants.Count)
                 Stop();
         }
 

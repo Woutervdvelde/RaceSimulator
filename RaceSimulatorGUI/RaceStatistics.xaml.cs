@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Controller;
 
 namespace RaceSimulatorGUI
 {
@@ -20,6 +21,12 @@ namespace RaceSimulatorGUI
         public RaceStatistics()
         {
             InitializeComponent();
+        }
+
+        private void Force_NextRace(object sender, RoutedEventArgs e)
+        {
+            if (!Data.Competition.Done)
+                Data.CurrentRace.Stop();
         }
     }
 }

@@ -9,8 +9,15 @@
     <Window.DataContext>
         <local:RaceDataContext/>
     </Window.DataContext>
-    <Grid Background="#FFCE65" HorizontalAlignment="Stretch">
-        <Label Content="Race" HorizontalAlignment="Center" FontSize="24" FontWeight="Bold"/>
+    <Grid Background="#FFCE65">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Content="Race" HorizontalAlignment="Center" FontSize="24" FontWeight="Bold"/>
+            <Button Grid.Column="1" Content="Force next race" Click="Force_NextRace" Width="100" Height="40" VerticalAlignment="Top" Margin="0,5,0,0"/>
+        </Grid>
         <Grid Margin="10,50,10,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="10*"/>
