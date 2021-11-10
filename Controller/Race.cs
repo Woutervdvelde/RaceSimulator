@@ -55,11 +55,11 @@ namespace Controller
             RandomizeEquipment();
 
             Competition.CompetitionFinished += OnCompetitionFinished;
-            RaceStarted?.Invoke(this, new EventArgs());
         }
 
         public void Start()
         {
+            RaceStarted?.Invoke(this, new EventArgs());
             _timer.Start();
             _startTime = DateTime.Now;
         }

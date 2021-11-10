@@ -26,7 +26,6 @@ namespace RaceSimulator
             _lastY = 0;
             _offsetX = 0;
             _offsetY = 0;
-            Data.CurrentRace.DriversChanged += OnDriversChanged;
         }
 
         #region graphics
