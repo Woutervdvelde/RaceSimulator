@@ -15,6 +15,12 @@ namespace RaceSimulatorGUI
         public List<RaceDriverPosition> RaceDriverPositions { get; set; }
         public List<LapTimeSpan> LapTimeSpans { get; set; }
 
+        public BitmapSource BackgroundPlank { get => 
+                ResourceManager.CreateBitmapSourceFromGdiBitmap(
+                    ResourceManager.GetImage($".\\Resources\\UI\\plank.png")
+                );
+        }
+
         public RaceDataContext()
         {
             Race.DriversChanged += OnDriversChanged;
@@ -56,6 +62,9 @@ namespace RaceSimulatorGUI
                 .Select((p, i) => new RaceDriverPosition((Driver)p, i + 1))
                 .OrderByDescending(p => p.Laps)
                 .ToList();
+
+            for (int i = 0; i < RaceDriverPositions.Count; i++)
+                RaceDriverPositions[i].Position = i + 1;
         }
 
         public void GenerateLapTimes()
@@ -79,10 +88,14 @@ namespace RaceSimulatorGUI
     public class RaceDriverPosition
     {
         public Driver Participant { get; set; }
-
-        //TODO: position doesn't show correctly
         public int Position { get; set; }
-        public int Laps { get => Data.CurrentRace.ParticipantLaps[Participant]; }
+        public int Laps { get {
+                if (Data.CurrentRace.ParticipantLaps.TryGetValue(Participant, out int value))
+                    return value;
+                else
+                    return 0;
+            }
+        }
         public TimeSpan LapTime {
             get
             {

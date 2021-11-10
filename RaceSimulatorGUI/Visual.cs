@@ -68,7 +68,9 @@ namespace RaceSimulatorGUI
         {
             if (_baseTrack != null) return _baseTrack;
 
-            Bitmap baseTrack = ResourceManager.GetEmptyImage((_maxX - _minX) + _width, (_maxY - _minY) + _height);
+            int width = _maxX - _minX + _width;
+            int height = _maxY - _minY + _height;
+            Bitmap baseTrack = ResourceManager.GetEmptyImage(width != 0 ? width : 10, height != 0 ? height : 10);
             Graphics graphics = Graphics.FromImage(baseTrack);
 
             foreach (Section section in track.Sections)

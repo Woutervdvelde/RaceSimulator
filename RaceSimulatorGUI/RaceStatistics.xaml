@@ -14,45 +14,59 @@
         <Grid Margin="10,50,10,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="10*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="0.5*"/>
                 <ColumnDefinition Width="10*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <ListView Grid.Column="0" ItemsSource="{Binding RaceDriverPositions}">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Position" Width="50" DisplayMemberBinding="{Binding Position}"/>
-                        <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding Participant.Name}"/>
-                        <GridViewColumn Header="Lap time" Width="100" DisplayMemberBinding="{Binding LapTime}"/>
-                        <GridViewColumn Header="Car" Width="50">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Image Source="{Binding Image}"/>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn Header="Laps" Width="50" DisplayMemberBinding="{Binding Laps}"/>
-                    </GridView>
-                </ListView.View>
-            </ListView>
+            <StackPanel>
+                <StackPanel.Background>
+                    <ImageBrush ImageSource="{Binding BackgroundPlank}" />
+                </StackPanel.Background>
+                <StackPanel.Children>
+                    <ListView Grid.Column="0" ItemsSource="{Binding RaceDriverPositions}" Background="Transparent" Foreground="White">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Position" Width="45" DisplayMemberBinding="{Binding Position}"/>
+                                <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding Participant.Name}"/>
+                                <GridViewColumn Header="Lap time" Width="120" DisplayMemberBinding="{Binding LapTime}"/>
+                                <GridViewColumn Header="Car" Width="50">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Image Source="{Binding Image}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Laps" Width="50" DisplayMemberBinding="{Binding Laps}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </StackPanel.Children>
+            </StackPanel>
 
-            <ListView Grid.Column="2" ItemsSource="{Binding LapTimeSpans}">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Lap time" Width="150" DisplayMemberBinding="{Binding LapTime}"/>
-                        <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding Participant.Name}"/>
-                        <GridViewColumn Header="Car" Width="50">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Image Source="{Binding Image}"/>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                    </GridView>
-                </ListView.View>
-            </ListView>
+            <StackPanel Grid.Column="2">
+                <StackPanel.Background>
+                    <ImageBrush ImageSource="{Binding BackgroundPlank}" />
+                </StackPanel.Background>
+                <StackPanel.Children>
+                    <ListView ItemsSource="{Binding LapTimeSpans}" Background="Transparent" Foreground="White">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Lap time" Width="125" DisplayMemberBinding="{Binding LapTime}"/>
+                                <GridViewColumn Header="Name" Width="125" DisplayMemberBinding="{Binding Participant.Name}"/>
+                                <GridViewColumn Header="Car" Width="50">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Image Source="{Binding Image}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </StackPanel.Children>
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>

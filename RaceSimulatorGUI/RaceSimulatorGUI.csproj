@@ -117,6 +117,7 @@
     <None Remove="Resources\Start_Horizontal.png" />
     <None Remove="Resources\Straight_Horizontal.png" />
     <None Remove="Resources\Straight_Vertical.png" />
+    <None Remove="Resources\UI\plank.png" />
     <None Remove="Resources\Yellow_Corner_NE_East_Left.png" />
     <None Remove="Resources\Yellow_Corner_NE_East_Right.png" />
     <None Remove="Resources\Yellow_Corner_NE_North_Left.png" />
@@ -473,6 +474,9 @@
     </Content>
     <Content Include="Resources\Straight_Vertical.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\UI\plank.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Yellow_Corner_NE_East_Left.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

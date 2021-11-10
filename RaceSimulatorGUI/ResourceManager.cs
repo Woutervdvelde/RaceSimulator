@@ -38,6 +38,9 @@ namespace RaceSimulatorGUI
             if (_resources.TryGetValue("empty", out Bitmap img))
                 return (Bitmap)img.Clone();
 
+            if (w == 0 && h == 0)
+                return null;
+
             Bitmap bitmap = new Bitmap(w, h);
             using (Graphics gfx = Graphics.FromImage(bitmap))
             using (SolidBrush brush = new SolidBrush(System.Drawing.Color.FromArgb(255, 206, 101)))

@@ -11,20 +11,11 @@ namespace RaceSimulatorGUI
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public string TrackName { 
-            get {
-                return Data.CurrentRace.Track.Name;
-            }}
+        public string TrackName { get => $"Track: {Data.CurrentRace.Track.Name}"; }
 
         public MainWindowDataContext()
         {
             Race.RaceStarted += OnRaceStarted;
-            Race.DriversChanged += OnDriversChanged;
-        }
-
-        public void OnDriversChanged(object sender, EventArgs args)
-        {
-            //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(""));
         }
 
         public void OnRaceStarted(object sender, EventArgs args)

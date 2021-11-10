@@ -18,9 +18,7 @@ namespace RaceSimulatorGUI
         public string NextRaceName { 
             get {
                 Data.Competition.Tracks.TryPeek(out Track t);
-                if (t != null)
-                    return t.Name;
-                return ""; 
+                return t != null ? t.Name : "";
             }
         }
 

@@ -27,10 +27,10 @@
                             <MenuItem Background="#996c38" Header="Exit" Click="MenuItem_Exit_Click"/>
                         </MenuItem>
                     </Menu>
-                    <StackPanel Background="Transparent" Grid.Column="1" MouseDown="Window_MouseDown" Cursor="ScrollAll">
+                    <StackPanel Background="Transparent" Grid.Column="1" MouseDown="Window_MouseDown">
                         <TextBlock HorizontalAlignment="Center" Text="RaceSimulator"/>
                     </StackPanel>
-                    <Button Content="X" Grid.Column="2" Click="MenuItem_Exit_Click" Background="#FFF45432" Foreground="#FF43290D"/>
+                    <Button Content="✖" Grid.Column="2" Click="MenuItem_Exit_Click" Background="#FFF45432" Foreground="#FF43290D" FontSize="14" FontWeight="Normal"/>
                 </Grid>
             </DockPanel>
 
