@@ -112,7 +112,7 @@ namespace RaceSimulator
                 DrawTrack(driverArgs.Track);
         }
 
-        private static void GenerateCoordinatesAndGraphics(Track track)
+        public static void GenerateCoordinatesAndGraphics(Track track)
         {
             foreach (Section section in track.Sections)
             {

@@ -26,13 +26,15 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
+                <RowDefinition Height="11*"/>
             </Grid.RowDefinitions>
-            <StackPanel>
+            <Label Grid.Column="0" Grid.Row="0" Content="Current positions:"/>
+            <StackPanel Grid.Column="0" Grid.Row="1">
                 <StackPanel.Background>
                     <ImageBrush ImageSource="{Binding BackgroundPlank}" />
                 </StackPanel.Background>
                 <StackPanel.Children>
-                    <ListView Grid.Column="0" ItemsSource="{Binding RaceDriverPositions}" Background="Transparent" Foreground="White">
+                    <ListView ItemsSource="{Binding RaceDriverPositions}" Background="Transparent" Foreground="White">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Position" Width="45" DisplayMemberBinding="{Binding Position}"/>
@@ -52,7 +54,8 @@
                 </StackPanel.Children>
             </StackPanel>
 
-            <StackPanel Grid.Column="2">
+            <Label Grid.Column="2" Grid.Row="0" Content="All laptimes:"/>
+            <StackPanel Grid.Column="2" Grid.Row="1">
                 <StackPanel.Background>
                     <ImageBrush ImageSource="{Binding BackgroundPlank}" />
                 </StackPanel.Background>
