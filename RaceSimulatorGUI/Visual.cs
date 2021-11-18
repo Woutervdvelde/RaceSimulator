@@ -27,6 +27,8 @@ namespace RaceSimulatorGUI
 
         private const int _width = 250;
         private const int _height = 200;
+        private const string _start_horizontal = ".\\Resources\\Start_Horizontal.png";
+        private const string _finish_horizontal = ".\\Resources\\Finish_Horizontal.png";
         private const string _straight_horizontal = ".\\Resources\\Straight_Horizontal.png";
         private const string _straight_vertical = ".\\Resources\\Straight_Vertical.png";
         private const string _corner_NE = ".\\Resources\\Corner_NE.png";
@@ -66,7 +68,9 @@ namespace RaceSimulatorGUI
         {
             if (_baseTrack != null) return _baseTrack;
 
-            Bitmap baseTrack = ResourceManager.GetEmptyImage((_maxX - _minX) + _width, (_maxY - _minY) + _height);
+            int width = _maxX - _minX + _width;
+            int height = _maxY - _minY + _height;
+            Bitmap baseTrack = ResourceManager.GetEmptyImage(width != 0 ? width : 10, height != 0 ? height : 10);
             Graphics graphics = Graphics.FromImage(baseTrack);
 
             foreach (Section section in track.Sections)
@@ -134,10 +138,10 @@ namespace RaceSimulatorGUI
             switch (section.SectionType)
             {
                 case SectionTypes.StartGrid:
-                    section.Image = _straight_horizontal;
+                    section.Image = _start_horizontal;
                     break;
                 case SectionTypes.Finish:
-                    section.Image = _straight_horizontal;
+                    section.Image = _finish_horizontal;
                     break;
                 case SectionTypes.Straight:
                     if (_direction == Directions.North || _direction == Directions.South)

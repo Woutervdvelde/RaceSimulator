@@ -18,54 +18,79 @@ namespace Controller
          *  - Track must start with all the StartGrids (min of 3)
          *  - The last Section should always be the Finish
          */
+        // TODO: make delegate for DriversChanged
         public Track Track { get; set; }
         public List<IParticipant> Participants { get; set; }
         public int Laps { get; set; }
+        public Dictionary<IParticipant, int> ParticipantLaps;
+        public Dictionary<IParticipant, LinkedList<TimeSpan>> LapTimes;
 
-        public DateTime StartTime { get; set; }
         public event EventHandler DriversChanged;
-        public event EventHandler RaceFinished;
+        public static event EventHandler RaceFinished;
+        public static event EventHandler RaceStarted;
 
         public LinkedList<IParticipant> Leaderboard;
 
         private Random _random;
         private Dictionary<Section, SectionData> _positions;
-        private Dictionary<IParticipant, int> _laps;
         private Timer _timer;
+        private DateTime _startTime;
         private bool _needsUpdate;
 
         public Race(Track track, List<IParticipant> participants, int laps)
         {
             Track = track;
             Participants = participants;
+            Leaderboard = new LinkedList<IParticipant>();
             Laps = laps;
+            LapTimes = new Dictionary<IParticipant, LinkedList<TimeSpan>>();
+
             _random = new Random(DateTime.Now.Millisecond);
             _positions = new Dictionary<Section, SectionData>();
-            InitializeLaps();
-            Leaderboard = new LinkedList<IParticipant>();
             _timer = new Timer(500);
             _timer.Elapsed += OnTimedEvent;
+
+            InitializeLaps();
             PositionParticipants(track, participants);
             RandomizeEquipment();
+
+            Competition.CompetitionFinished += OnCompetitionFinished;
         }
 
         public void Start()
         {
+            RaceStarted?.Invoke(this, new EventArgs());
             _timer.Start();
+            _startTime = DateTime.Now;
         }
 
         public void Stop()
         {
-            RaceFinished?.Invoke(this, new EventArgs());
-            _timer = null;
             DriversChanged = null;
+            _timer.Stop();
+            _timer = null;
+            RaceFinished?.Invoke(this, new EventArgs());
+            Competition.CompetitionFinished -= OnCompetitionFinished;
+        }
+
+        public void OnCompetitionFinished(object sender, EventArgs args)
+        {
+            RaceStarted = null;
             RaceFinished = null;
+            DriversChanged = null;
         }
 
         private void OnTimedEvent(Object source, ElapsedEventArgs args)
         {
-            MoveParticipants();
             RandomlyPunishParticipant();
+            MoveParticipants();
+
+            if (_needsUpdate)
+            {
+                DriversChangedEventArgs e = new DriversChangedEventArgs(Track);
+                DriversChanged?.Invoke(this, e);
+                _needsUpdate = false;
+            }
         }
 
         public SectionData GetSectionData(Section section)
@@ -126,29 +151,46 @@ namespace Controller
                 {
                     if (_random.Next(1, 30 / p.Equipment.Quality) == 1)
                     {
+                        _needsUpdate = true;
                         p.Equipment.IsBroken = false;
                         if (p.Equipment.Performance > Car.MIN_PERFORMANCE)
                             p.Equipment.Performance -= 1;
                     }
                 } else
                     if (_random.Next(1, p.Equipment.Quality) == 1)
+                    {
+                        _needsUpdate = true;
                         p.Equipment.IsBroken = true;
+                    }
             }
         }
 
         public void InitializeLaps()
         {
-            _laps = new Dictionary<IParticipant, int>();
+            ParticipantLaps = new Dictionary<IParticipant, int>();
 
             foreach (IParticipant p in Participants)
-                _laps.Add(p, 0);
+                ParticipantLaps.Add(p, 0);
         }
 
         public void AddParticipantLap(IParticipant p)
         {
-            _laps[p] += 1;
-            if (_laps[p] >= Laps)
+            ParticipantLaps[p] += 1;
+            if (ParticipantLaps[p] >= Laps)
                 ParticipantFinished(p);
+
+            TimeSpan elapsed = DateTime.Now - _startTime;
+            if (LapTimes.TryGetValue(p, out LinkedList<TimeSpan> times))
+            {
+                TimeSpan time = elapsed - times.Last.Value;
+                times.AddLast(time);
+            } 
+            else
+            {
+                LinkedList<TimeSpan> list = new LinkedList<TimeSpan>();
+                list.AddLast(elapsed);
+                LapTimes.Add(p, list);
+            }
         }
 
         public void ParticipantFinished(IParticipant p)
@@ -160,12 +202,13 @@ namespace Controller
                 data.Right = null;
 
             Leaderboard.AddLast(p);
+            p.Points += (4 - Leaderboard.Count < 1 ? 1 : 4 - Leaderboard.Count);
             CheckFinished();
         }
 
         public void CheckFinished()
         {
-            if (Leaderboard.Count == Participants.Count)
+            if (Leaderboard.Count >= Participants.Count)
                 Stop();
         }
 
@@ -174,11 +217,18 @@ namespace Controller
             foreach (Section section in Track.Sections)
             {
                 SectionData data = GetSectionData(section);
+                int distance;
                 if (data.Left != null && !data.Left.Equipment.IsBroken)
-                    data.DistanceLeft += data.Left.Equipment.Performance * data.Left.Equipment.Speed;
+                {
+                    distance = data.Left.Equipment.Performance * data.Left.Equipment.Speed;
+                    data.DistanceLeft += distance;
+                }
 
                 if (data.Right != null && !data.Right.Equipment.IsBroken)
-                    data.DistanceRight += data.Right.Equipment.Performance * data.Right.Equipment.Speed;
+                {
+                    distance = data.Right.Equipment.Performance * data.Right.Equipment.Speed;
+                    data.DistanceRight += distance;
+                }
 
                 if (data.DistanceLeft >= Section.Length && data.DistanceRight >= Section.Length)
                 {
@@ -203,13 +253,6 @@ namespace Controller
             }
 
             CheckAllWaiting();
-
-            if (_needsUpdate)
-            {
-                DriversChangedEventArgs args = new DriversChangedEventArgs(Track);
-                DriversChanged?.Invoke(this, args);
-                _needsUpdate = false;
-            }
         }
 
         public void MoveToNext(Section currentSection, IParticipant participant)

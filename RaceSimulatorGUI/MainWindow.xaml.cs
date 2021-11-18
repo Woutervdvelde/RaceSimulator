@@ -23,46 +23,72 @@ namespace RaceSimulatorGUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        private CompetitionStatistics _competitionStatistics;
+        private RaceStatistics _raceStatistics;
+
         public MainWindow()
         {
-            InitializeComponent();
             Data.Initialize();
             Data.NextRace();
 
-            Visual.Initialize(Data.CurrentRace);
-            DrawTrack(Data.CurrentRace.Track);
+            InitializeComponent();
 
-            Data.CurrentRace.RaceFinished += NextRace;
-            Data.CurrentRace.DriversChanged += OnDriversChanged;
-            Data.CurrentRace.Start();
+            Race.RaceFinished += NextRace;
+            Start();
         }
 
-        void NextRace(object source, EventArgs args)
+        private void NextRace(object source, EventArgs args)
         {
             Data.NextRace();
             if (Data.Competition.Done)
                 return;
 
-            Visual.Initialize(Data.CurrentRace);
-            DrawTrack(Data.CurrentRace.Track);
-            Data.CurrentRace.RaceFinished += NextRace;
-            Data.CurrentRace.DriversChanged += OnDriversChanged;
-            Data.CurrentRace.Start();
-
+            Start();
         }
 
-        void OnDriversChanged(object source, EventArgs args)
+        private void Start()
+        {
+            Visual.Initialize(Data.CurrentRace);
+            DrawTrack(Data.CurrentRace.Track);
+            Data.CurrentRace.DriversChanged += OnDriversChanged;
+            Data.CurrentRace.Start();
+        }
+
+        private void OnDriversChanged(object source, EventArgs args)
         {
             DriversChangedEventArgs driverArgs = args as DriversChangedEventArgs;
             DrawTrack(driverArgs.Track);
         }
 
-        void DrawTrack(Track track)
+        private void DrawTrack(Track track)
         {
             this.Track.Dispatcher.BeginInvoke(DispatcherPriority.Render, new Action(() => {
                 this.Track.Source = null;
                 this.Track.Source = Visual.DrawTrack(track);
             }));
+        }
+
+        private void MenuItem_MenuItem_Race_Click(object sender, RoutedEventArgs args)
+        {
+            _raceStatistics = new RaceStatistics();
+            _raceStatistics.Show();
+        }
+
+        private void MenuItem_MenuItem_Competition_Click(object sender, RoutedEventArgs args)
+        {
+            _competitionStatistics = new CompetitionStatistics();
+            _competitionStatistics.Show();
+        }
+
+        private void MenuItem_Exit_Click(object sender, RoutedEventArgs args)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                DragMove();
         }
     }
 }

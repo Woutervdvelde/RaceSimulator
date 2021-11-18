@@ -5,8 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RaceSimulatorGUI"
         mc:Ignorable="d"
+        Background="#FFCE65"
+        WindowStyle="None"
         Title="MainWindow" Height="450" Width="800">
-    <Grid Background="#FFCE65">
-        <Image x:Name="Track" HorizontalAlignment="Left" Height="450" Margin="0,0,0,0" VerticalAlignment="Top" Width="800"/>
+    <Window.DataContext>
+        <local:MainWindowDataContext/>
+    </Window.DataContext>
+    <Grid>
+        <DockPanel x:Name="RootWindow">
+            <DockPanel x:Name="TitleBar" DockPanel.Dock="Top">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="0.5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Menu Grid.Column="0" DockPanel.Dock="Top" VerticalAlignment="Top" Background="Transparent">
+                        <MenuItem Grid.Column="0" Header="☰" FontWeight="Bold" FontSize="18" Foreground="#FF43290D" HorizontalAlignment="Left">
+                            <MenuItem Background="#996c38" Header="Open race stats" Click="MenuItem_MenuItem_Race_Click"/>
+                            <MenuItem Background="#996c38" Header="Open competition stats" Click="MenuItem_MenuItem_Competition_Click"/>
+                            <MenuItem Background="#996c38" Header="Exit" Click="MenuItem_Exit_Click"/>
+                        </MenuItem>
+                    </Menu>
+                    <StackPanel Background="Transparent" Grid.Column="1" MouseDown="Window_MouseDown">
+                        <TextBlock HorizontalAlignment="Center" Text="RaceSimulator"/>
+                    </StackPanel>
+                    <Button Content="✖" Grid.Column="2" Click="MenuItem_Exit_Click" Background="#FFF45432" Foreground="#FF43290D" FontSize="14" FontWeight="Normal"/>
+                </Grid>
+            </DockPanel>
+
+            <ContentControl Content="{Binding CurrentPage}" />
+        </DockPanel>
+        <Label Content="{Binding TrackName, Mode=OneWay}" Width="800" Margin="0,30,0,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" FontWeight="ExtraBold" FontSize="14"/>
+        <Image x:Name="Track" HorizontalAlignment="Center" Height="370" Margin="0,60,0,0" VerticalAlignment="Top" Width="800"/>
     </Grid>
 </Window>

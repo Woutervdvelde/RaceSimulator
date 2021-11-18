@@ -56,10 +56,16 @@
     <None Remove="Resources\Broken_Vertical_Straight_North_Right.png" />
     <None Remove="Resources\Broken_Vertical_Straight_South_Left.png" />
     <None Remove="Resources\Broken_Vertical_Straight_South_Right.png" />
+    <None Remove="Resources\Cars\Car_Blue.png" />
+    <None Remove="Resources\Cars\Car_Broken.png" />
+    <None Remove="Resources\Cars\Car_Green.png" />
+    <None Remove="Resources\Cars\Car_Red.png" />
+    <None Remove="Resources\Cars\Car_Yellow.png" />
     <None Remove="Resources\Corner_NE.png" />
     <None Remove="Resources\Corner_NW.png" />
     <None Remove="Resources\Corner_SE.png" />
     <None Remove="Resources\Corner_SW.png" />
+    <None Remove="Resources\Finish_Horizontal.png" />
     <None Remove="Resources\Green_Corner_NE_East_Left.png" />
     <None Remove="Resources\Green_Corner_NE_East_Right.png" />
     <None Remove="Resources\Green_Corner_NE_North_Left.png" />
@@ -108,8 +114,10 @@
     <None Remove="Resources\Red_Vertical_Straight_North_Right.png" />
     <None Remove="Resources\Red_Vertical_Straight_South_Left.png" />
     <None Remove="Resources\Red_Vertical_Straight_South_Right.png" />
+    <None Remove="Resources\Start_Horizontal.png" />
     <None Remove="Resources\Straight_Horizontal.png" />
     <None Remove="Resources\Straight_Vertical.png" />
+    <None Remove="Resources\UI\plank.png" />
     <None Remove="Resources\Yellow_Corner_NE_East_Left.png" />
     <None Remove="Resources\Yellow_Corner_NE_East_Right.png" />
     <None Remove="Resources\Yellow_Corner_NE_North_Left.png" />
@@ -284,6 +292,21 @@
     <Content Include="Resources\Broken_Vertical_Straight_South_Right.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Cars\Car_Blue.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Cars\Car_Broken.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Cars\Car_Green.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Cars\Car_Red.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Cars\Car_Yellow.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Corner_NE.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -295,6 +318,9 @@
     </Content>
     <Content Include="Resources\Corner_SW.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Finish_Horizontal.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Green_Corner_NE_East_Left.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -440,11 +466,17 @@
     <Content Include="Resources\Red_Vertical_Straight_South_Right.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Start_Horizontal.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Straight_Horizontal.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Straight_Vertical.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\UI\plank.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Yellow_Corner_NE_East_Left.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

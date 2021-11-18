@@ -15,7 +15,7 @@ namespace RaceSimulator
             Visual.Initialize(Data.CurrentRace);
             Visual.DrawTrack(Data.CurrentRace.Track);
 
-            Data.CurrentRace.RaceFinished += NextRace;
+            Race.RaceFinished += NextRace;
             Data.CurrentRace.Start();
 
             for (; ; )
@@ -37,8 +37,6 @@ namespace RaceSimulator
 
                 Visual.Initialize(Data.CurrentRace);
                 Visual.DrawTrack(Data.CurrentRace.Track);
-
-                Data.CurrentRace.RaceFinished += NextRace;
                 Data.CurrentRace.Start();
             }
         }
